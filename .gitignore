@@ -1,4 +1,4 @@
-# Ignorar node_modules en el subdirectorio TIMESHEETS_BACKEND
+# BACKEND
 /TIMESHEETS_BACKEND/node_modules
 
 # Ignorar directorios y archivos específicos en public
@@ -28,3 +28,63 @@
 /TIMESHEETS_BACKEND/.DS_Store
 /TIMESHEETS_BACKEND/yarn.lock
 /TIMESHEETS_BACKEND/google_credentials.json
+
+
+
+
+
+
+# FRONTEND
+
+# compiled output
+/TIMESHEETS_FRONTEND/dist
+/TIMESHEETS_FRONTEND/tmp
+/TIMESHEETS_FRONTEND/out-tsc
+# Only exists if Bazel was run
+/TIMESHEETS_FRONTEND/bazel-out
+
+# dependencies
+/TIMESHEETS_FRONTEND/node_modules
+
+# profiling files
+/TIMESHEETS_FRONTEND/chrome-profiler-events*.json
+/TIMESHEETS_FRONTEND/speed-measure-plugin*.json
+
+# IDEs and editors
+/TIMESHEETS_FRONTEND/.idea
+/TIMESHEETS_FRONTEND/.project
+/TIMESHEETS_FRONTEND/.classpath
+/TIMESHEETS_FRONTEND/.c9/
+/TIMESHEETS_FRONTEND/*.launch
+/TIMESHEETS_FRONTEND/.settings/
+/TIMESHEETS_FRONTEND/*.sublime-workspace
+
+# IDE - VSCode
+/TIMESHEETS_FRONTEND/.vscode/*
+!/TIMESHEETS_FRONTEND/.vscode/settings.json
+!/TIMESHEETS_FRONTEND/.vscode/tasks.json
+!/TIMESHEETS_FRONTEND/.vscode/launch.json
+!/TIMESHEETS_FRONTEND/.vscode/extensions.json
+/TIMESHEETS_FRONTEND/.history/*
+
+# misc
+/TIMESHEETS_FRONTEND/.angular/cache
+/TIMESHEETS_FRONTEND/.sass-cache
+/TIMESHEETS_FRONTEND/connect.lock
+/TIMESHEETS_FRONTEND/coverage
+/TIMESHEETS_FRONTEND/libpeerconnection.log
+/TIMESHEETS_FRONTEND/npm-debug.log
+/TIMESHEETS_FRONTEND/yarn-error.log
+/TIMESHEETS_FRONTEND/testem.log
+/TIMESHEETS_FRONTEND/typings
+
+# System Files
+/TIMESHEETS_FRONTEND/.DS_Store
+/TIMESHEETS_FRONTEND/Thumbs.db
+
+
+
+
+
+
+
