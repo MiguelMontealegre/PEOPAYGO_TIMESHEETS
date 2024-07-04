@@ -1,0 +1,30 @@
+# Ignorar node_modules en el subdirectorio TIMESHEETS_BACKEND
+/TIMESHEETS_BACKEND/node_modules
+
+# Ignorar directorios y archivos específicos en public
+/TIMESHEETS_BACKEND/public/hot
+/TIMESHEETS_BACKEND/public/storage
+/TIMESHEETS_BACKEND/public/tmp
+/TIMESHEETS_BACKEND/public/vendor
+
+# Ignorar archivos de configuración y caché en storage
+/TIMESHEETS_BACKEND/storage/*.key
+/TIMESHEETS_BACKEND/storage/tmp
+
+# Ignorar vendor y otros archivos y directorios específicos del proyecto
+/TIMESHEETS_BACKEND/vendor
+/TIMESHEETS_BACKEND/.env
+/TIMESHEETS_BACKEND/.env.backup
+/TIMESHEETS_BACKEND/.phpunit.result.cache
+/TIMESHEETS_BACKEND/Homestead.json
+/TIMESHEETS_BACKEND/Homestead.yaml
+/TIMESHEETS_BACKEND/npm-debug.log
+/TIMESHEETS_BACKEND/yarn-error.log
+/TIMESHEETS_BACKEND/.idea
+/TIMESHEETS_BACKEND/.vscode
+/TIMESHEETS_BACKEND/composer.lock
+/TIMESHEETS_BACKEND/.php-cs-fixer.cache
+/TIMESHEETS_BACKEND/phpunit.xml
+/TIMESHEETS_BACKEND/.DS_Store
+/TIMESHEETS_BACKEND/yarn.lock
+/TIMESHEETS_BACKEND/google_credentials.json
