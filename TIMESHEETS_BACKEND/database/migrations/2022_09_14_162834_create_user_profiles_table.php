@@ -31,15 +31,6 @@ return new class extends Migration {
                 $table->text('about')->nullable();
 
 
-				$table->uuid('paymentTypeId')->nullable();
-                $table->foreign('paymentTypeId')
-                    ->references('id')
-                    ->on('paymentTypes')
-                    ->onDelete('restrict')
-                    ->onUpdate('restrict');
-				$table->string('paymentAmount')->nullable();
-
-
                 $table->uuid('mediaId')->nullable();
                 $table->foreign('mediaId')
                     ->references('id')

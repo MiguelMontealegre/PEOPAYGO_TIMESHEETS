@@ -98,47 +98,6 @@
         </div>
 
 
-        <div class="col-md-6 mb-3">
-          <label for="paymentType">Payment Type</label>
-          <ng-select
-            formControlName="paymentType"
-            [items]="paymentTypeOptions"
-            bindLabel="name"
-            labelForId="paymentType"
-            [multiple]="false"
-            autocomplete="off"
-            placeholder="Payment Type"
-            [clearable]="true"
-            clearAllText="x"
-            [ngClass]="ngClassValidate(group, 'paymentType')"
-            name="paymentType">
-          </ng-select>
-          <div *ngIf="submit && f" class="invalid-feedback">
-            <div *ngIf="f['paymentType'].errors">
-              The role must be valid
-            </div>
-          </div>
-        </div>
-
-
-        <div class="col-md-6 mb-3">
-          <label for="paymentAmount"> Payment Amount </label>
-          <input
-            id="paymentAmount"
-            formControlName="paymentAmount"
-            min="1"
-            type="number"
-            class="form-control"
-            autocomplete="new-data"
-            [ngClass]="ngClassValidate(group, 'paymentAmount')" />
-            <div *ngIf="submit && f" class="invalid-feedback">
-              <div *ngIf="f['paymentAmount'].errors">
-                Payment amount is required
-              </div>
-            </div>
-        </div>
-
-
       </div>
       <div class="row" formGroupName="profile" *ngIf="!isAdminUser">
         <div class="col-md-6 mb-3">

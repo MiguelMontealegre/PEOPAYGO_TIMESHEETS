@@ -70,9 +70,6 @@
                     Email
                   </th>
                   <th style="width: 10%">{{TRANSLATE_KEY+ 'ROLES' | translate}}</th>
-                  <th>Payment Amount</th>
-                  <th>Payment type</th>
-
                   <th class="text-end">{{TRANSLATE_KEY+ 'ACTIONS' | translate}}</th>
                 </tr>
               </thead>
@@ -92,8 +89,6 @@
                           </span>
                         </div>
                       </td>
-                      <td>{{ data.profile?.paymentAmount }}</td>
-                      <td>{{ data.profile?.paymentType?.name }}</td>
                       <td>
                         <div class="d-flex gap-2 justify-content-end">
                           <button

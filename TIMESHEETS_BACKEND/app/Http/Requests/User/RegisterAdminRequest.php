@@ -50,10 +50,6 @@ class RegisterAdminRequest extends FormRequest
                 'min:3',
                 'max:255',
             ],
-			'paymentAmount'  => [
-                'required',
-                'integer',
-            ],
             'email'     => [
                 'string',
                 'email',
@@ -68,11 +64,6 @@ class RegisterAdminRequest extends FormRequest
                 'required',
                 'exists:roles,name',
             ],
-			'paymentTypeId'      => [
-                'required',
-                'exists:paymentTypes,id',
-            ],
-
         ];
 
     }//end rules()

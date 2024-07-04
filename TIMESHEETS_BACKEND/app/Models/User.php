@@ -10,7 +10,6 @@ use App\Models\User\Role;
 use App\Traits\UuidTrait;
 use App\Models\ApiService;
 use App\Models\Media\Media;
-use App\Models\PaymentType;
 use Illuminate\Http\Request;
 use Laravel\Cashier\Billable;
 use Laravel\Scout\Searchable;

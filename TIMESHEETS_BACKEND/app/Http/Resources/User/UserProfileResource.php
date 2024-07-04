@@ -38,10 +38,6 @@ class UserProfileResource extends JsonResource
             'media'            => $this->resource->media,
             'preferredName'    => $this->resource->preferredName,
 
-			'paymentAmount'    => $this->resource->paymentAmount,
-			'paymentType'    => $this->resource->paymentType,
-			
-
             'archivedAt'       => $this->resource->archivedAt,
             'publicProfileUrl' => $this->resource->publicProfileUrl,
         ];

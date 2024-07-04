@@ -1,4 +1,3 @@
-import { PaymentType } from '@models/payment-types/payment-type.model';
 import { Profile } from '@models/account/profile.model';
 import { RoleEntity } from './role-entity.model';
 
@@ -17,9 +16,6 @@ export interface User {
   userId?: string;
   roleNames: string[];
   medias?: number;
-
-  paymentAmount?: number;
-  PaymentType?: PaymentType;
 
 
   updatedAt: Date;

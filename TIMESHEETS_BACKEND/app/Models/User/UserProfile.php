@@ -6,7 +6,6 @@ namespace App\Models\User;
 use App\Models\User;
 use App\Traits\UuidTrait;
 use App\Models\Media\Media;
-use App\Models\PaymentType;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Database\Factories\UserProfileFactory;
@@ -92,17 +91,6 @@ class UserProfile extends Model
 
     }//end media()
 
-
-	 /**
-     * Get Payment type
-     *
-     * @return BelongsTo
-     */
-    public function paymentType(): BelongsTo
-    {
-        return $this->belongsTo(PaymentType::class, 'paymentTypeId');
-
-    }//end media()
 
 
     /**

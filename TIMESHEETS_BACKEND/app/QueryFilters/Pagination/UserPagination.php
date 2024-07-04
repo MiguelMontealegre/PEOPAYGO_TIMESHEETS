@@ -9,7 +9,6 @@ use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use App\Models\Payment;
 use Illuminate\Support\Facades\Log;
 
 /**

@@ -18,7 +18,6 @@ import { UntypedFormGroup } from '@angular/forms';
 import { User } from '@models/account/user.model';
 import { Validators } from '@angular/forms';
 import { get } from 'lodash';
-import { PaymentType } from '@models/payment-types/payment-type.model';
 import { CommonVerbsApiService } from '@services/common/common-verbs-api.service';
 
 @Component({
@@ -36,8 +35,6 @@ export class GeneralFormComponent extends CommonComponent implements OnInit {
     id: [null, []],
     firstName: [null, [Validators.required, Validators.minLength(3)]],
     lastName: [null, [Validators.required, Validators.minLength(3)]],
-    paymentType: [null, [Validators.required]],
-    paymentAmount: [null, [Validators.required]],
     email: [null, [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/),]],
     roles: [null, [Validators.required]],
@@ -61,7 +58,6 @@ export class GeneralFormComponent extends CommonComponent implements OnInit {
   ];
 
   roleOptions: Role[] = [];
-  paymentTypeOptions: PaymentType[] = [];
 
 
   get f() {
@@ -100,15 +96,6 @@ export class GeneralFormComponent extends CommonComponent implements OnInit {
             }
           });
         this.unsubscribe.push(roleList);
-
-
-        const paymentTypeList = this.api2
-          .get<PaymentType[]>('payment-types/all')
-          .subscribe((r: PaymentType[]) => {
-            this.paymentTypeOptions = r;
-            this.load(value);
-          });
-        this.unsubscribe.push(paymentTypeList);
       }
     });
     this.unsubscribe.push(subscribe);
@@ -117,13 +104,10 @@ export class GeneralFormComponent extends CommonComponent implements OnInit {
   ngSubmit(): void {
     this.submit = true;
     const role = this.group.controls['roles'].value;
-    const paymentType = this.group.controls['paymentType'].value;
-    console.log(this.group.controls['paymentType'].value, this.group.controls['roles'].value);
 
     if (this.group.valid) {
       const body = this.group.getRawValue();
       body.role = role.name;
-      body.paymentTypeId = paymentType.id;
       delete body.roles;
       const id = get(body, 'id', null);
       let subscribe: Observable<User>;

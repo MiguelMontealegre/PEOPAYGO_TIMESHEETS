@@ -164,8 +164,6 @@ class RegisterUserController extends Controller
                 'lastName' => $request->input('lastName'),
                 'phoneNumber' => $request->input('phoneNumber', null),
                 'urlSlug' => UserHelper::createUniqueUserSlug($request->input('firstName'), $request->input('lastName')),
-				'paymentTypeId' => $request->input('paymentTypeId'),
-				'paymentAmount' => $request->input('paymentAmount'),
             ]
         );
         /**
