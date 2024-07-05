@@ -2,15 +2,15 @@
 
 namespace App\Models;
 
+use App\Models\Employee;
+use App\Models\Timesheet;
 use App\Traits\UuidTrait;
 use Laravel\Scout\Searchable;
-use App\Models\EmployeeTimesheetData;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Timesheet extends Model
+class EmployeeTimesheetData extends Model
 {
     use Searchable, UuidTrait;
 
@@ -37,6 +37,17 @@ class Timesheet extends Model
     protected $guarded = [];
 
 
+
+
+	/**
+     * Rename Default Table Name
+     *
+     * @var string
+     */
+    protected $table = 'employeeTimesheetData';
+
+
+
 	/**
      * Overrides Searchable fields
      *
@@ -45,7 +56,7 @@ class Timesheet extends Model
     public function toSearchableArray(): array
     {
         return [
-            'title'           => $this->title,
+            'grossSalary'           => $this->grossSalary,
         ];
 
     }//end toSearchableArray()
@@ -54,27 +65,30 @@ class Timesheet extends Model
 
 
 
-
 	/**
-     * Get clientCompany
+     * Get timesheet
      *
      * @return BelongsTo
      */
-    public function clientCompany(): BelongsTo
+    public function timesheet(): BelongsTo
     {
-        return $this->belongsTo(ClientCompany::class, 'clientCompanyId');
+        return $this->belongsTo(Timesheet::class, 'timesheetId');
 
     }//end modelbot()
 
 
 
 
-	public function employeeTimesheetData(): HasMany
+	/**
+     * Get timesheet
+     *
+     * @return BelongsTo
+     */
+    public function employee(): BelongsTo
     {
-        return $this->hasMany(EmployeeTimesheetData::class, 'timesheetId')
-            ->whereNull('employeeTimesheetData.deletedAt');
+        return $this->belongsTo(Employee::class, 'employeeId');
 
-    }
+    }//end modelbot()
 
 
 }
