@@ -8,6 +8,54 @@
             <div class="p-4 mt-auto">
               <div class="row justify-content-center">
                 <div class="col-lg-7">
+                  <div class="text-center text-white">
+                    <h4 class="mb-3">
+                      <i
+                        class="bx bxs-quote-alt-left text-primary h1 align-middle me-3"
+                      ></i
+                      ><span class="text-primary">1k</span>+ {{ TRANSLATE_KEY + 'SATISFIED' | translate }}
+                    </h4>
+
+                    <div dir="ltr">
+                      <owl-carousel-o
+                        class="owl-theme auth-review-carousel"
+                        [options]="carouselOption"
+                      >
+                        <ng-template carouselSlide>
+                          <div class="item">
+                            <div class="py-3">
+                              <p class="font-size-16 mb-4">
+                                " Impressive tool! Love the notifications feature. Easy to use. Great support from the team. Thank you team! "
+                              </p>
+
+                              <div>
+                                <h4 class="font-size-16 text-primary">
+                                  Alber1981
+                                </h4>
+                                <p class="font-size-14 mb-0">- {{ TRANSLATE_KEY+ 'ROBIN_USER' | translate }}</p>
+                              </div>
+                            </div>
+                          </div>
+                        </ng-template>
+                        <ng-template carouselSlide>
+                          <div class="item">
+                            <div class="py-3">
+                              <p class="font-size-16 mb-4">
+                                " At first, I assumed it was similar to other tested platforms like Jasper, CopyAI, GaryAi, etc. However, after thorough testing, it became evident that the approach is significantly superior. "
+                              </p>
+
+                              <div>
+                                <h4 class="font-size-16 text-primary">
+                                  valen345h
+                                </h4>
+                                <p class="font-size-14 mb-0">- User</p>
+                              </div>
+                            </div>
+                          </div>
+                        </ng-template>
+                      </owl-carousel-o>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -23,20 +71,15 @@
           <div class="d-flex flex-column h-100">
             <div class="">
               <a routerLink="/" class="d-block auth-logo">
-                <img [src]="mode === 'dark' ? 'assets/images/logos/lazo.png' : 'assets/images/logos/lazo.png'" alt="lazo"
-                height="90"
+                <img [src]="mode === 'dark' ? '/assets/images/logos/timesheets.png' : '/assets/images/logos/timesheets.png'" alt="time"
+                height="40"
                 class="logo" />
               </a>
             </div>
             <div class="my-auto">
               <div>
                 <h3 class="welcome-text">{{ TRANSLATE_KEY+ 'WELCOME_BACK' | translate }}</h3>
-                <p class="welcome-text">{{ TRANSLATE_KEY+ 'SING' | translate }}</p>
-              </div>
-              <div class="mt-2 d-grid">
-                <button (click)="redirectToExternalAuth('google')" class="btn p-2 btn-light text-dark fw-semibold bg-white">
-                  <img src="assets/images/oauth/google.svg" class="bg-white rounded-circle me-1" width="24" height="24" alt=""> Continue with google
-                </button>
+                <p class="welcome-text">Inicia sesión para continuar</p>
               </div>
               <p class="text-center mt-3 mb-0">Or</p>
               <div class="mt-3">
@@ -144,7 +187,7 @@
             </div>
 
             <div class="mt-4 mt-md-5 text-center">
-              <p class="mb-0">© {{ year }} Lazo.</p>
+              <p class="mb-0">© {{ year }} timesheets.</p>
             </div>
           </div>
         </div>
