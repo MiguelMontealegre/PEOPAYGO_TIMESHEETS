@@ -10,6 +10,7 @@ npm i --force
 
 ng serve
 
+http://localhost:4200/#/
 
 # BACKEND
 Acceder a la carpeta TIMESHEETS_BACKEND
@@ -23,3 +24,7 @@ composer install
 php artisan migrate --seed
 
 php artisan serve
+
+http://127.0.0.1:8000
+
+
