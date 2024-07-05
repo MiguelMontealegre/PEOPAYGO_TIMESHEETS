@@ -16,10 +16,6 @@ return new class extends Migration
 		Schema::create('employeeTimesheetData', function (Blueprint $table) {
 			$table->uuid('id')->primary();
 
-			$table->integer('hours');
-			$table->bigInteger('grossSalary');
-
-
 			$table->uuid('timesheetId')->nullable();
 			$table->foreign('timesheetId')
 				->references('id')

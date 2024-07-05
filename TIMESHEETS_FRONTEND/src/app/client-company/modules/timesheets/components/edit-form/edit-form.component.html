@@ -122,7 +122,7 @@
           <div class="col-md-6 mb-3">
             <label for="employees">Employees</label>
             <ng-select
-              formControlName="paymentTypeId"
+              formControlName="employees"
               [items]="employeeOptions"
               bindLabel="name"
               labelForId="employees"
@@ -131,11 +131,11 @@
               placeholder="Employees"
               [clearable]="true"
               clearAllText="x"
-              [ngClass]="ngClassValidate(group, 'paymentTypeId')"
+              [ngClass]="ngClassValidate(group, 'employees')"
               name="employees">
             </ng-select>
             <div *ngIf="submit && f" class="invalid-feedback">
-              <div *ngIf="f['paymentTypeId'].errors">
+              <div *ngIf="f['employees'].errors">
                 The role must be valid
               </div>
             </div>

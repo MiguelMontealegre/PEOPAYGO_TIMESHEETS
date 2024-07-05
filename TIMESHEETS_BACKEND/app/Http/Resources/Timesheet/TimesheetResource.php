@@ -31,7 +31,7 @@ class TimesheetResource extends JsonResource
 
 				'clientCompany' => $this->resource->clientCompany,
 
-				'employeeTimesheetData'       => EmployeeTimesheetDataResource::collection($this->whenLoaded('employeeTimesheetData')),
+				'employeesTimesheetData'       => EmployeeTimesheetDataResource::collection($this->resource->employeeTimesheetData),
 				'paymentPeriodStartDate'           => $this->resource->paymentPeriodStartDate,
 				'paymentPeriodEndDate'           => $this->resource->paymentPeriodEndDate,
             ]

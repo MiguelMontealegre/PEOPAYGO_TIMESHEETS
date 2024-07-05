@@ -72,6 +72,7 @@ export class EditFormComponent
       id: [null],
       title: ['', Validators.required],
       checkDate: [null, [Validators.required]],
+      employees: [[], [Validators.required]],
       paymentPeriodStartDate: [null, [Validators.required]],
       paymentPeriodEndDate: [null, [Validators.required]],
     });
@@ -198,6 +199,7 @@ export class EditFormComponent
       id: timesheet.id,
       title: timesheet.title,
       checkDate: timesheet.checkDate,
+      employees: timesheet.employeesTimesheetData?.map(item => item.employee),
       paymentPeriodStartDate: timesheet.paymentPeriodStartDate,
       paymentPeriodEndDate: timesheet.paymentPeriodEndDate
     });
@@ -212,10 +214,12 @@ export class EditFormComponent
 
   override ngSubmit(): void {
     this.submit = true;
-    console.log(this.group.getRawValue());
     if (this.group.valid) {
       const body = this.group.getRawValue();
+      const employees = this.group.controls['employees'].value;
+      const employeesIds = employees.map((e: Employee) => e.id);
       body.clientCompanyId = this.clientCompany.id;
+      body.employees = employeesIds;
       const id = get(body, 'id', null);
       let subscribe: Observable<any>;
       let path = '/';

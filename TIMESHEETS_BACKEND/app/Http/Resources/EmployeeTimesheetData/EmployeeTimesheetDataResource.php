@@ -23,8 +23,6 @@ class EmployeeTimesheetDataResource extends JsonResource
         $response = collect(
             [
                 'id'             => $this->resource->id,
-                'hours'           => $this->resource->hours,
-				'grossSalary'           => $this->resource->grossSalary,
 				'employee' => $this->resource->employee
             ]
         );
