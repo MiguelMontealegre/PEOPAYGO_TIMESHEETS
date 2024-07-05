@@ -17,6 +17,7 @@ return new class extends Migration
 			$table->uuid('id')->primary();
 			$table->string('name');
 			$table->bigInteger('paymentAmount');
+			$table->integer('hours')->nullable();
 
 			$table->uuid('clientCompanyId')->nullable();
 			$table->foreign('clientCompanyId')

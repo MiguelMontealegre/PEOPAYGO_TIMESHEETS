@@ -6,6 +6,7 @@ export interface Employee {
   name: string;
 
   paymentAmount: number;
+  hours?: number,
   paymentType: PaymentType;
   clientCompany?: ClientCompany;
 

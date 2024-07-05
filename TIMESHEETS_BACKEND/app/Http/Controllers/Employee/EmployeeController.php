@@ -19,5 +19,16 @@ use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 class EmployeeController extends Controller
 {
 
+	/**
+     * @return JsonResponse
+     */
+    public function getEmployeesList(Request $request): JsonResponse
+    {
+		$companies = $request->input('companies');
+        return response()
+            ->json(Employee::whereIn('clientCompanyId', $companies)->get())
+            ->setStatusCode(ResponseAlias::HTTP_OK);
+
+    }//end getRoleList()
 
 }//end class

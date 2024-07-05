@@ -30,6 +30,7 @@
           <div class="col-12">
             <div class="mb-3">
               <div class="col-12">
+                <label for="">Payment Period Start and End Date</label>
                 <div class="input-group mb-3">
                   <ng-template #t let-date let-focused="focused">
                     <span
@@ -95,7 +96,8 @@
 
 
 
-          <div class="col-12">
+          <div class="col-12 mb-3">
+            <label for="">Check Date</label>
             <div class="input-group">
               <input
                 ngbDatepicker
@@ -117,16 +119,16 @@
 
 
 
-          <!-- <div class="col-md-6 mb-3">
+          <div class="col-md-6 mb-3">
             <label for="employees">Employees</label>
             <ng-select
               formControlName="paymentTypeId"
-              [items]="paymentTypeOptions"
+              [items]="employeeOptions"
               bindLabel="name"
-              labelForId="paymentTypeId"
+              labelForId="employees"
               [multiple]="true"
               autocomplete="off"
-              placeholder="Payment types"
+              placeholder="Employees"
               [clearable]="true"
               clearAllText="x"
               [ngClass]="ngClassValidate(group, 'paymentTypeId')"
@@ -137,7 +139,7 @@
                 The role must be valid
               </div>
             </div>
-          </div> -->
+          </div>
 
 
           <div class="col-md-2 mb-3 float-end align-self-end ms-auto">
