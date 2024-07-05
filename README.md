@@ -4,12 +4,15 @@ Prueba tecnica
 
 
 # FRONTEND
+Acceder a la carpeta TIMESHEETS_FRONTEND
+
 npm i --force
 
 ng serve
 
 
 # BACKEND
+Acceder a la carpeta TIMESHEETS_BACKEND
 
 composer update
 
