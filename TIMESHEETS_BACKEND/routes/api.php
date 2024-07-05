@@ -149,6 +149,8 @@ Route::prefix('timesheets')
         Route::get('/', [TimesheetList::class, 'list']);
         Route::get('/{timesheet}', [TimesheetDetail::class, 'show']);
 		Route::post('/', [TimesheetController::class, 'createTimesheet']);
+		Route::put('/{timesheet}', [TimesheetController::class, 'updateTimesheet']);
+		Route::put('/{timesheet}/admin', [TimesheetController::class, 'adminEdit']);
         Route::delete('/{timesheet}', [TimesheetDelete::class, 'delete']);
 });
 

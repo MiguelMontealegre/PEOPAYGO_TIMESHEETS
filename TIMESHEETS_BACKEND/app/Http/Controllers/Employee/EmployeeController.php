@@ -26,7 +26,7 @@ class EmployeeController extends Controller
     {
 		$companies = $request->input('companies');
         return response()
-            ->json(Employee::whereIn('clientCompanyId', $companies)->get())
+            ->json(EmployeeResource::collection(Employee::whereIn('clientCompanyId', $companies)->get()))
             ->setStatusCode(ResponseAlias::HTTP_OK);
 
     }//end getRoleList()

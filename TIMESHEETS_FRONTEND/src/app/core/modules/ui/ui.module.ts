@@ -19,6 +19,7 @@ import { PunctuationPipe } from '../../pipes/punctuation.pipe';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SortableDirective } from '../../directives/tables/sortable.directive';
+import { TotalPayrollPipe } from '../../pipes/total-payroll.pipe';
 import { UserMediaComponent } from './gallery-input/user-media/user-media.component';
 
 @NgModule({
@@ -33,7 +34,8 @@ import { UserMediaComponent } from './gallery-input/user-media/user-media.compon
     GalleryModalComponent,
     UserMediaComponent,
     MediaInputComponent,
-    PunctuationPipe
+    PunctuationPipe,
+    TotalPayrollPipe
   ],
   exports: [
     SortableDirective,
@@ -45,7 +47,8 @@ import { UserMediaComponent } from './gallery-input/user-media/user-media.compon
     GalleryInputComponent,
     GalleryModalComponent,
     MediaInputComponent,
-    PunctuationPipe
+    PunctuationPipe,
+    TotalPayrollPipe
   ],
   imports: [
    NgbModule,

@@ -26,6 +26,25 @@ export class ListPageComponent extends CollectionComponent<Timesheet> {
     { label: 'Timesheets', active: true },
   ];
 
+
+
+  editingStatus = false;
+  editingIndex: number;
+  editingData: any;
+  originalStatus: string;
+
+  statusItems = [
+    {
+      label: 'Pending',
+      value: 'PENDING'
+    },
+    {
+      label: 'Processed',
+      value: 'PROCESSED'
+    }
+  ];
+
+
   constructor(
     private route: ActivatedRoute,
     router: Router,
@@ -35,12 +54,39 @@ export class ListPageComponent extends CollectionComponent<Timesheet> {
     private toastr: ToastrService,
     public authenticationService: AuthenticationService,
   ) {
-    super(router, location, ``, api, service, 10, 'title', [], [
-      {
-        key: 'clientCompanies',
-        values: [route.snapshot.data.clientCompany!.id],
+    super(router, location, ``, api, service, 10, 'title', []);
+  }
+
+  editStatus(data: Timesheet ,index: number) {
+    this.editingStatus = true;
+    this.editingIndex = index;
+    this.editingData = { ...data };
+    this.originalStatus = data.status
+  }
+
+  cancelEdit() {
+    this.editingStatus = false;
+  }
+
+  saveStatus(data: Timesheet) {
+    if (data.status === this.originalStatus) {
+      this.toastr.warning('No se realizaron cambios.');
+      return;
+    }
+
+    this.api.put(`/${data.id}/admin`, data).subscribe(
+      response => {
+        this.toastr.success('Cambios Aplicados.');
+        this.editingStatus = false;
+      },
+      error => {
+        this.toastr.error(error?.error?.message || 'Ocurrió un error.');
+        this.editingStatus = false;
+        this.clear();
       }
-    ]);
+    );
+
+    this.editingStatus = false;
   }
 
   delete(model: Timesheet) {

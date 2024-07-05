@@ -3,29 +3,28 @@
     <div class="card-body border-bottom">
       <div class="row">
         <div class="col-12">
-          <h4 class="card-title d-flex">
-            Employee information
-          </h4>
+          <h4 class="card-title d-flex">Employee information</h4>
           <p class="card-title-desc">
             Fill all information in order to create an employee
           </p>
         </div>
 
-
         <form class="row" [formGroup]="group" (ngSubmit)="ngSubmit()">
           <div class="col-md-6 mb-4" id="title">
             <label for="title"> Title </label>
-            <input id="title" placeholder="Timesheet title" formControlName="title"
-              type="text" class="form-control" autocomplete="new-data" [ngClass]="ngClassValidate(group, 'title')" />
+            <input
+              id="title"
+              placeholder="Timesheet title"
+              formControlName="title"
+              type="text"
+              class="form-control"
+              autocomplete="new-data"
+              [ngClass]="ngClassValidate(group, 'title')"
+            />
             <div *ngIf="submit && f" class="invalid-feedback">
-              <div *ngIf="f['title'].errors">
-                Title should be valid
-              </div>
+              <div *ngIf="f['title'].errors">Title should be valid</div>
             </div>
           </div>
-
-
-
 
           <div class="col-12">
             <div class="mb-3">
@@ -39,7 +38,8 @@
                       [class.range]="isRange(date)"
                       [class.faded]="isHovered(date) || isInside(date)"
                       (mouseenter)="hoveredDate = date"
-                      (mouseleave)="hoveredDate = null">
+                      (mouseleave)="hoveredDate = null"
+                    >
                       {{ date.day }}
                     </span>
                   </ng-template>
@@ -50,7 +50,8 @@
                     name="dpFromDate"
                     (click)="datepicker.toggle()"
                     [value]="formatter.format(fromDate)"
-                    (input)="(dpFromDate.value)" />
+                    (input)="(dpFromDate.value)"
+                  />
                   <input
                     width="1%"
                     name="datepicker"
@@ -63,7 +64,8 @@
                     [dayTemplate]="t"
                     outsideDays="hidden"
                     [startDate]="fromDate!"
-                    tabindex="-1" />
+                    tabindex="-1"
+                  />
                   <span class="input-group-text">To</span>
                   <input
                     #dpToDate
@@ -72,29 +74,37 @@
                     name="dpToDate"
                     (click)="datepicker.toggle()"
                     [value]="formatter.format(toDate)"
-                    (input)="(dpToDate.value)" />
+                    (input)="(dpToDate.value)"
+                  />
                   <button
                     class="btn btn-outline-secondary bi bi-calendar3"
                     (click)="datepicker.toggle()"
-                    type="button">
+                    type="button"
+                  >
                     <i class="bx bx-calendar me-1"></i>
                   </button>
                 </div>
                 <div *ngIf="submit && f">
-                  <div *ngIf="f['paymentPeriodStartDate'].errors" style="font-size: 80%;" class="text-danger">
+                  <div
+                    *ngIf="f['paymentPeriodStartDate'].errors"
+                    style="font-size: 80%"
+                    class="text-danger"
+                  >
                     paymentPeriodStartDate should be valid
                   </div>
                 </div>
                 <div *ngIf="submit && f">
-                  <div *ngIf="f['paymentPeriodEndDate'].errors" style="font-size: 80%;" class="text-danger">
+                  <div
+                    *ngIf="f['paymentPeriodEndDate'].errors"
+                    style="font-size: 80%"
+                    class="text-danger"
+                  >
                     paymentPeriodEndDate should be valid
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
-
 
           <div class="col-12 mb-3">
             <label for="">Check Date</label>
@@ -112,14 +122,15 @@
                 placeholder="mm/dd/yyyy"
                 (click)="date.toggle()"
                 class="form-control"
-                [ngClass]="ngClassValidate(group, 'checkDate')" />
-              <span class="input-group-text"><i class="bx bx-calendar-event"></i></span>
+                [ngClass]="ngClassValidate(group, 'checkDate')"
+              />
+              <span class="input-group-text"
+                ><i class="bx bx-calendar-event"></i
+              ></span>
             </div>
           </div>
 
-
-
-          <div class="col-md-6 mb-3">
+          <div class="col-12">
             <label for="employees">Employees</label>
             <ng-select
               formControlName="employees"
@@ -132,15 +143,13 @@
               [clearable]="true"
               clearAllText="x"
               [ngClass]="ngClassValidate(group, 'employees')"
-              name="employees">
+              name="employees"
+            >
             </ng-select>
             <div *ngIf="submit && f" class="invalid-feedback">
-              <div *ngIf="f['employees'].errors">
-                The role must be valid
-              </div>
+              <div *ngIf="f['employees'].errors">The employees must be valid</div>
             </div>
           </div>
-
 
           <div class="col-md-2 mb-3 float-end align-self-end ms-auto">
             <button type="submit" class="btn w-100 btn-primary w-md mt-4">
@@ -148,6 +157,54 @@
             </button>
           </div>
         </form>
+
+        <div class="card-body" *ngIf="f.employees?.value?.length > 0">
+
+
+          <div class="mb-4">
+            <h4>Status: <span style="color: darkblue">{{status}}</span></h4>
+            <h4>Note</h4>
+            <p>
+              {{note}}
+            </p>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-centered table-hover align-middle">
+              <thead>
+                <tr>
+                  <th sortable="name" class="w-30">
+                    Name
+                  </th>
+                  <th>Payment Amount</th>
+                  <th>Payment Type</th>
+                  <th>Hours</th>
+                  <th>Gross salary</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of f.employees.value">
+                  <th scope="row">{{ data.name }}</th>
+
+                  <td>{{ data.paymentAmount | punctuation }}</td>
+                  <td>{{ data.paymentType?.name }}</td>
+                  <td>{{ data.hours }}</td>
+                  <td>
+                    {{
+                      (data.paymentType?.name === "hour" && data.hours
+                        ? (data.paymentAmount * data.hours)
+                        : data.paymentAmount) | punctuation
+                    }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 class="mt-4">Gross Payroll: <span class="text-success ms-2">{{(f.employees?.value | totalPayroll) | punctuation}}</span></h3>
+
+
+        </div>
       </div>
     </div>
   </div>
