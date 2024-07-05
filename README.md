@@ -3,7 +3,14 @@ Prueba tecnica
 
 
 
+Video de funcionamiento:
+
 [Watch the video on YouTube](https://youtu.be/gqcVp00PuB0)
+
+
+Credenciales de Admin:
+email: admi@system.com
+password: nMlkj.,768-Ab
 
 
 
