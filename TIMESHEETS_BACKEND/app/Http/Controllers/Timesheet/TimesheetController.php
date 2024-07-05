@@ -10,6 +10,7 @@ use App\Models\User\UserProfile;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use App\Models\EmployeeTimesheetData;
 use App\Http\Resources\User\UserResource;
 use Symfony\Component\HttpFoundation\Response;
 use App\Http\Requests\Timesheet\TimesheetRequest;
@@ -23,7 +24,16 @@ class TimesheetController extends Controller
 
 	protected function createTimesheet(TimesheetRequest $request): JsonResponse
 	{
-		$timesheet = Timesheet::create($request->all());
+		$cleanRequest = $request->except(['employees']);
+		$timesheet = Timesheet::create($cleanRequest);
+
+		$employeesIds = $request->input('employees');
+		foreach($employeesIds as $employeeId){
+			EmployeeTimesheetData::create([
+				'timesheetId' => $timesheet->id,
+				'employeeId' => $employeeId
+			]);
+		}
 
 		return response()
 			->json($timesheet)

@@ -56,7 +56,6 @@ class EmployeeTimesheetData extends Model
     public function toSearchableArray(): array
     {
         return [
-            'grossSalary'           => $this->grossSalary,
         ];
 
     }//end toSearchableArray()

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Http\Requests\Timesheet;
@@ -10,27 +11,26 @@ class TimesheetRequest extends FormRequest
 {
 
 
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize(): bool
-    {
-        return true;
+	/**
+	 * Determine if the user is authorized to make this request.
+	 *
+	 * @return bool
+	 */
+	public function authorize(): bool
+	{
+		return true;
+	} //end authorize()
 
-    }//end authorize()
 
+	/**
+	 * Get the validation rules that apply to the request.
+	 *
+	 * @return array<string, mixed>
+	 */
+	public function rules(): array
+	{
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, mixed>
-     */
-    public function rules(): array
-    {
-
-        return [
+		return [
 			'title' => ['required', 'string'],
 			'status' => ['nullable', 'string'],
 			'note' => ['nullable', 'string'],
@@ -38,9 +38,15 @@ class TimesheetRequest extends FormRequest
 			'paymentPeriodStartDate' => ['required', 'date'],
 			'paymentPeriodEndDate' => ['required', 'date'],
 
-        ];
+			'employees' => ['required', 'array'],
+			'employees.*' => [
+				'required',
+				'uuid',
+				'exists:employees,id'
+			],
 
-    }//end rules()
+		];
+	} //end rules()
 
 
 }//end class
