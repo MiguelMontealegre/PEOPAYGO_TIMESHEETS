@@ -25,21 +25,9 @@
           </div>
 
 
-          <div class="col-md-6 mb-4" id="paymentAmount">
-            <label for="paymentAmount"> Payment Amount </label>
-            <input id="paymentAmount" placeholder="Employee name" formControlName="paymentAmount"
-              type="number" class="form-control" autocomplete="new-data" [ngClass]="ngClassValidate(group, 'paymentAmount')" />
-            <div *ngIf="submit && f" class="invalid-feedback">
-              <div *ngIf="f['paymentAmount'].errors">
-                payment Amount should be valid
-              </div>
-            </div>
-          </div>
-
-
 
           <div class="col-md-6 mb-3">
-            <label for="paymentTypeId">Role</label>
+            <label for="paymentTypeId">Payment Type</label>
             <ng-select
               formControlName="paymentTypeId"
               [items]="paymentTypeOptions"
@@ -56,6 +44,30 @@
             <div *ngIf="submit && f" class="invalid-feedback">
               <div *ngIf="f['paymentTypeId'].errors">
                 The role must be valid
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-md-6 mb-4" id="hours" *ngIf="f.paymentTypeId?.value?.name === 'hour'">
+            <label for="hours"> Hours </label>
+            <input id="hours" placeholder="Hours Quantity" formControlName="hours"
+              type="number" class="form-control" autocomplete="new-data" />
+            <div *ngIf="submit && f" class="text-danger">
+              <div *ngIf="!f?.hours.value" style="font-size: 80%;">
+               Hours should be valid
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-md-6 mb-4" id="paymentAmount">
+            <label for="paymentAmount"> Payment Amount </label>
+            <input id="paymentAmount" placeholder="Payment Amount" formControlName="paymentAmount"
+              type="number" class="form-control" autocomplete="new-data" [ngClass]="ngClassValidate(group, 'paymentAmount')" />
+            <div *ngIf="submit && f" class="invalid-feedback">
+              <div *ngIf="f['paymentAmount'].errors">
+                payment Amount should be valid
               </div>
             </div>
           </div>

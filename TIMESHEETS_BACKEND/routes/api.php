@@ -22,6 +22,7 @@ use App\Http\Controllers\Auth\LoginUserController;
 use App\Http\Controllers\Timesheet\TimesheetDelete;
 use App\Http\Controllers\Timesheet\TimesheetDetail;
 use App\Http\Controllers\Auth\RegisterUserController;
+use App\Http\Controllers\Employee\EmployeeController;
 use App\Http\Controllers\MediaEntity\MediaEntityList;
 use App\Http\Controllers\PaymentType\PaymentTypeList;
 use App\Http\Controllers\Auth\PasswordResetController;
@@ -123,6 +124,7 @@ Route::prefix('payment-types')
 Route::prefix('employees')
     ->group(function () {
         Route::get('/', [EmployeeList::class, 'list']);
+		Route::get('/all-from-company', [EmployeeController::class, 'getEmployeesList']);
         Route::get('/{employee}', [EmployeeDetail::class, 'show']);
         Route::post('/', [EmployeeCreate::class, 'create']);
         Route::put('/{employee}', [EmployeeUpdate::class, 'update']);

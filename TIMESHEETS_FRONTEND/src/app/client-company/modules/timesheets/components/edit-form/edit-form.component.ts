@@ -11,11 +11,11 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { get } from 'lodash';
 import { ClientCompany } from '@models/client-company/client-company.model';
-import { PaymentType } from '@models/payment-types/payment-type.model';
 import { Timesheet } from '@models/timesheets/timesheet.model';
 import { NgbDate, NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct, NgbInputDatepicker } from '@ng-bootstrap/ng-bootstrap';
 import { CustomDateAdapter } from '@utils/custom-date-adapter';
 import { CustomDateParserUsFormatter } from '@utils/custom-date-parser-formatter';
+import { Employee } from '@models/employees/employee.model';
 @Component({
   selector: 'app-edit-form',
   templateUrl: './edit-form.component.html',
@@ -39,7 +39,7 @@ export class EditFormComponent
   clientCompanies: any[] = [];
   initDataLoaded = false;
 
-  paymentTypeOptions = [];
+  employeeOptions = [];
 
 
   hoveredDate: NgbDate | null = null;
@@ -89,12 +89,12 @@ export class EditFormComponent
     });
     this.unsubscribe.push(subscribe);
 
-    const paymentTypesApi = this.api2
-      .get<PaymentType[]>('employees/all')
-      .subscribe((r: PaymentType[]) => {
-        this.paymentTypeOptions = r;
+    const employeesApi = this.api2
+      .get<Employee[]>('employees/all-from-company', {companies: [this.clientCompany.id]})
+      .subscribe((r: Employee[]) => {
+        this.employeeOptions = r;
       });
-    this.unsubscribe.push(paymentTypesApi);
+    this.unsubscribe.push(employeesApi);
 
     const subscribe1 = this.model$.subscribe(model => {
       if (model) {

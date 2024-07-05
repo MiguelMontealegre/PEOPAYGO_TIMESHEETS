@@ -39,6 +39,8 @@
                   </th>
                   <th>Payment Amount</th>
                   <th>Payment Type</th>
+                  <th>Hours</th>
+                  <th>Gross salary</th>
                   <th scope="col" width="300px">Actions</th>
                 </tr>
               </thead>
@@ -48,6 +50,8 @@
 
                   <td>{{ data.paymentAmount }}</td>
                   <td>{{data.paymentType.name}}</td>
+                  <td>{{data.hours}}</td>
+                  <td>{{data.paymentType?.name === 'hour' && data.hours ? data.paymentAmount * data.hours : data.paymentAmount}}</td>
                   <td>
                     <div class="d-flex gap-1 justify-content-start">
                       <a

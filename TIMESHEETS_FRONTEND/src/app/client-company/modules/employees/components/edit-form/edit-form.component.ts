@@ -53,6 +53,7 @@ export class EditFormComponent
       id: [null],
       name: ['', Validators.required],
       paymentAmount: [null, [Validators.required]],
+      hours: [null],
       paymentTypeId: [null, [Validators.required]],
     });
     this.clientCompany = this.route.snapshot.data.clientCompany;
@@ -109,6 +110,7 @@ export class EditFormComponent
       id: employee.id,
       name: employee.name,
       paymentAmount: employee.paymentAmount,
+      hours: employee.hours,
       paymentTypeId: employee.paymentType
     });
   }
@@ -116,6 +118,9 @@ export class EditFormComponent
 
   override ngSubmit(): void {
     this.submit = true;
+    if(this.f.paymentTypeId?.value?.name === 'hour' && !this.f?.hours.value){
+      return;
+    }
     if (this.group.valid) {
       const body = this.group.getRawValue();
       const paymentType = this.group.controls['paymentTypeId'].value;

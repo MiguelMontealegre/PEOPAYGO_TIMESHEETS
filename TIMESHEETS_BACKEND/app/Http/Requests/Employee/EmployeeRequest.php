@@ -36,6 +36,10 @@ class EmployeeRequest extends FormRequest
                 'required',
                 'integer',
             ],
+			'hours'  => [
+                'nullable',
+                'integer',
+            ],
 			'paymentTypeId'      => [
                 'required',
                 'exists:paymentTypes,id',

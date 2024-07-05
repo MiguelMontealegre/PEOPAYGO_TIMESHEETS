@@ -4,6 +4,7 @@ declare(strict_types=1);
 use Illuminate\Database\Seeder;
 use Database\Seeders\UserSeeder;
 use Database\Seeders\MediaSeeder;
+use Database\Seeders\PaymentTypeSeeder;
 
 
 /**
@@ -29,6 +30,7 @@ class DatabaseSeeder extends Seeder
             [
                 UserSeeder::class,
                 MediaSeeder::class,
+				PaymentTypeSeeder::class
             ]
         );
 
