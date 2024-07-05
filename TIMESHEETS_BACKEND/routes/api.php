@@ -34,6 +34,7 @@ use App\Http\Controllers\PaymentType\PaymentTypeCreate;
 use App\Http\Controllers\PaymentType\PaymentTypeDelete;
 use App\Http\Controllers\PaymentType\PaymentTypeDetail;
 use App\Http\Controllers\PaymentType\PaymentTypeUpdate;
+use App\Http\Controllers\Timesheet\TimesheetController;
 use App\Http\Controllers\ClientCompany\ClientCompanyList;
 use App\Http\Controllers\Auth\PasswordTokenCheckController;
 use App\Http\Controllers\ClientCompany\ClientCompanyCreate;
@@ -145,6 +146,7 @@ Route::prefix('timesheets')
     ->group(function () {
         Route::get('/', [TimesheetList::class, 'list']);
         Route::get('/{timesheet}', [TimesheetDetail::class, 'show']);
+		Route::post('/', [TimesheetController::class, 'createTimesheet']);
         Route::delete('/{timesheet}', [TimesheetDelete::class, 'delete']);
 });
 

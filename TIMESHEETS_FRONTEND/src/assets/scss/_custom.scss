@@ -239,6 +239,32 @@
     }
   }
 
+  ngb-datepicker.dropdown-menu {
+    .ngb-dp-navigation-select {
+      .form-select {
+        margin: 0 6px;
+      }
+    }
+    .ngb-dp-day {
+      .custom-day {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        &:hover:not(.faded),
+        &.range {
+          background-color: #07b59a;
+          color: #fff;
+        }
+        &.faded {
+          background-color: #e6f8f5;
+          color: #495057;
+        }
+      }
+    }
+  }
+
   ngx-dropzone {
     position: relative;
     .ngx-dropzone-image-preview {

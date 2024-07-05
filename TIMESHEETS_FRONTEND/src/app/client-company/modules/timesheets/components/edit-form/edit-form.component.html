@@ -1,0 +1,152 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card-body border-bottom">
+      <div class="row">
+        <div class="col-12">
+          <h4 class="card-title d-flex">
+            Employee information
+          </h4>
+          <p class="card-title-desc">
+            Fill all information in order to create an employee
+          </p>
+        </div>
+
+
+        <form class="row" [formGroup]="group" (ngSubmit)="ngSubmit()">
+          <div class="col-md-6 mb-4" id="title">
+            <label for="title"> Title </label>
+            <input id="title" placeholder="Timesheet title" formControlName="title"
+              type="text" class="form-control" autocomplete="new-data" [ngClass]="ngClassValidate(group, 'title')" />
+            <div *ngIf="submit && f" class="invalid-feedback">
+              <div *ngIf="f['title'].errors">
+                Title should be valid
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <div class="col-12">
+            <div class="mb-3">
+              <div class="col-12">
+                <div class="input-group mb-3">
+                  <ng-template #t let-date let-focused="focused">
+                    <span
+                      class="custom-day"
+                      [class.focused]="focused"
+                      [class.range]="isRange(date)"
+                      [class.faded]="isHovered(date) || isInside(date)"
+                      (mouseenter)="hoveredDate = date"
+                      (mouseleave)="hoveredDate = null">
+                      {{ date.day }}
+                    </span>
+                  </ng-template>
+                  <input
+                    #dpFromDate
+                    class="form-control"
+                    placeholder="mm-dd-yyyy"
+                    name="dpFromDate"
+                    (click)="datepicker.toggle()"
+                    [value]="formatter.format(fromDate)"
+                    (input)="(dpFromDate.value)" />
+                  <input
+                    width="1%"
+                    name="datepicker"
+                    class="form-control position-absolute invisible"
+                    ngbDatepicker
+                    #datepicker="ngbDatepicker"
+                    [autoClose]="'outside'"
+                    (dateSelect)="onDateSelection($event, datepicker)"
+                    [displayMonths]="2"
+                    [dayTemplate]="t"
+                    outsideDays="hidden"
+                    [startDate]="fromDate!"
+                    tabindex="-1" />
+                  <span class="input-group-text">To</span>
+                  <input
+                    #dpToDate
+                    class="form-control"
+                    placeholder="mm-dd-yyyy"
+                    name="dpToDate"
+                    (click)="datepicker.toggle()"
+                    [value]="formatter.format(toDate)"
+                    (input)="(dpToDate.value)" />
+                  <button
+                    class="btn btn-outline-secondary bi bi-calendar3"
+                    (click)="datepicker.toggle()"
+                    type="button">
+                    <i class="bx bx-calendar me-1"></i>
+                  </button>
+                </div>
+                <div *ngIf="submit && f">
+                  <div *ngIf="f['paymentPeriodStartDate'].errors" style="font-size: 80%;" class="text-danger">
+                    paymentPeriodStartDate should be valid
+                  </div>
+                </div>
+                <div *ngIf="submit && f">
+                  <div *ngIf="f['paymentPeriodEndDate'].errors" style="font-size: 80%;" class="text-danger">
+                    paymentPeriodEndDate should be valid
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="col-12">
+            <div class="input-group">
+              <input
+                ngbDatepicker
+                #date="ngbDatepicker"
+                ngbDatepicker
+                [startDate]="startDate"
+                (dateSelect)="onCheckDateSelection($event, datepicker)"
+                [minDate]="{ year: 1800, month: 1, day: 1 }"
+                [maxDate]="{ year: 2038, month: 1, day: 19 }"
+                [value]="formatter.format(checkDate)"
+                autoClose="true"
+                placeholder="mm/dd/yyyy"
+                (click)="date.toggle()"
+                class="form-control"
+                [ngClass]="ngClassValidate(group, 'checkDate')" />
+              <span class="input-group-text"><i class="bx bx-calendar-event"></i></span>
+            </div>
+          </div>
+
+
+
+          <!-- <div class="col-md-6 mb-3">
+            <label for="employees">Employees</label>
+            <ng-select
+              formControlName="paymentTypeId"
+              [items]="paymentTypeOptions"
+              bindLabel="name"
+              labelForId="paymentTypeId"
+              [multiple]="true"
+              autocomplete="off"
+              placeholder="Payment types"
+              [clearable]="true"
+              clearAllText="x"
+              [ngClass]="ngClassValidate(group, 'paymentTypeId')"
+              name="employees">
+            </ng-select>
+            <div *ngIf="submit && f" class="invalid-feedback">
+              <div *ngIf="f['paymentTypeId'].errors">
+                The role must be valid
+              </div>
+            </div>
+          </div> -->
+
+
+          <div class="col-md-2 mb-3 float-end align-self-end ms-auto">
+            <button type="submit" class="btn w-100 btn-primary w-md mt-4">
+              save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

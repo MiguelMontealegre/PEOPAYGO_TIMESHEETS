@@ -25,6 +25,13 @@ const routes: Routes = [
             m => m.EmployeesModule
           ),
       },
+      {
+        path: 'timesheets',
+        loadChildren: () =>
+          import('./modules/timesheets/timesheets.module').then(
+            m => m.TimesheetsModule
+          ),
+      },
     ]
   }
 ];

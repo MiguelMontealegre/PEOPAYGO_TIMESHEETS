@@ -4,9 +4,8 @@ import { ClientCompanyResolver } from '@resolvers/client-company.resolver';
 import { CommonModule } from '@angular/common';
 import { CommonVerbsApiService } from '@services/common/common-verbs-api.service';
 import { CoreModule } from 'src/app/core/core.module';
+import { CustomDateAdapter } from '@utils/custom-date-adapter';
 import { EditFormComponent } from './components/edit-form/edit-form.component';
-import { Employee } from '@models/employees/employee.model';
-import { EmployeesRoutingModule } from './employees-routing.module';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { FormPageComponent } from './pages/form-page/form-page.component';
 import { FormsModule } from '@angular/forms';
@@ -19,6 +18,8 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Timesheet } from '@models/timesheets/timesheet.model';
+import { TimesheetsRoutingModule } from './timesheets-routing.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { UiModule } from '@modules/ui/ui.module';
 
@@ -27,7 +28,7 @@ import { UiModule } from '@modules/ui/ui.module';
     FormPageComponent, EditFormComponent, ListPageComponent
   ],
   imports: [
-    EmployeesRoutingModule,
+    TimesheetsRoutingModule,
     CoreModule,
     CommonModule,
     FormsModule,
@@ -48,9 +49,10 @@ import { UiModule } from '@modules/ui/ui.module';
     CommonVerbsApiService,
     ClientCompanyResolver,
     {
-      provide: 'EmployeeService',
-      useFactory: () => new ModelService<Employee>(),
+      provide: 'TimesheetService',
+      useFactory: () => new ModelService<Timesheet>(),
     },
+    CustomDateAdapter
   ],
 })
-export class EmployeesModule { }
+export class TimesheetsModule { }

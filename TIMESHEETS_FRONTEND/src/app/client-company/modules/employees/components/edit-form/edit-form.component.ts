@@ -11,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { get } from 'lodash';
 import { ClientCompany } from '@models/client-company/client-company.model';
-import { Employee } from '@models/employee/employee.model';
+import { Employee } from '@models/employees/employee.model';
 import { PaymentType } from '@models/payment-types/payment-type.model';
 @Component({
   selector: 'app-edit-form',
