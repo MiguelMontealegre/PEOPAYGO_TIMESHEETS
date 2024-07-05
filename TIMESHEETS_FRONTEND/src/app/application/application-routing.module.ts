@@ -14,7 +14,7 @@ const routes: Routes = [
         m => m.AdministrationModule
       ),
     canActivate: [AuthGuard, RoleGuard],
-    data: { roles: ['ADMIN','MARKETER_USER','SALE_USER'] }
+    data: { roles: ['ADMIN'] }
   },
   {
     path: 'client-company',

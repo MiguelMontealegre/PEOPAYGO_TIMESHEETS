@@ -16,8 +16,6 @@ const routes: Routes = [
           import('./modules/users/users.module').then(
             m => m.UsersModule
           ),
-          canActivate: [RoleGuard],
-          data: { roles: ['ADMIN'] }
       },
       {
         path: 'payment-types',
@@ -25,8 +23,13 @@ const routes: Routes = [
           import('./modules/payment-types/payment-types.module').then(
             m => m.PaymentTypesModule,
           ),
-          canActivate: [RoleGuard],
-          data: { roles: ['ADMIN'] }
+      },
+      {
+        path: 'timesheets',
+        loadChildren: () =>
+          import('./modules/timesheets/timesheets.module').then(
+            m => m.TimesheetsModule,
+          ),
       },
     ]
   },
@@ -36,4 +39,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class AdministrationRoutingModule {}
+export class AdministrationRoutingModule { }

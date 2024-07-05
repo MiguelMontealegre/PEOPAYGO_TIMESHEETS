@@ -28,12 +28,59 @@ class TimesheetController extends Controller
 		$timesheet = Timesheet::create($cleanRequest);
 
 		$employeesIds = $request->input('employees');
+		
 		foreach($employeesIds as $employeeId){
 			EmployeeTimesheetData::create([
 				'timesheetId' => $timesheet->id,
 				'employeeId' => $employeeId
 			]);
 		}
+
+		return response()
+			->json($timesheet)
+			->setStatusCode(Response::HTTP_OK);
+	} //end createModelBot()
+
+
+
+
+
+	protected function updateTimesheet(Timesheet $timesheet, TimesheetRequest $request): JsonResponse
+	{
+		$cleanRequest = $request->except(['employees']);
+		$timesheet->update($cleanRequest);
+
+		$employeesIds = $request->input('employees');
+		$employeesTimesheetData = EmployeeTimesheetData::query()->where('timesheetId', $timesheet->id)->whereNotIn('id', $employeesIds)->get();
+		foreach ($employeesTimesheetData as $elem) {
+			$elem->delete();
+		}
+		
+		foreach($employeesIds as $employeeId){
+			EmployeeTimesheetData::create([
+				'timesheetId' => $timesheet->id,
+				'employeeId' => $employeeId
+			]);
+		}
+
+		return response()
+			->json($timesheet)
+			->setStatusCode(Response::HTTP_OK);
+	} //end createModelBot()
+
+
+
+	protected function adminEdit(Timesheet $timesheet, Request $request): JsonResponse
+	{
+
+		$status = $request->input('status', null);
+		$note = $request->input('note', null);
+
+		$timesheet->update([
+			'status' => $status,
+			'note' => $note
+		]);
+
 
 		return response()
 			->json($timesheet)

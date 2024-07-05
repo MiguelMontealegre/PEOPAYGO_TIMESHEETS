@@ -1,0 +1,107 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card-body border-bottom">
+      <div class="row">
+        <div class="col-12">
+          <h4 class="card-title d-flex">Employee information</h4>
+          <p class="card-title-desc">
+            Fill all information in order to create an employee
+          </p>
+        </div>
+
+        <form class="row" [formGroup]="group" (ngSubmit)="ngSubmit()">
+          <div class="col-12 mb-4" id="title">
+            <label for="title"> Note </label>
+            <textarea
+              id="note"
+              placeholder="Timesheet note"
+              formControlName="note"
+              type="text"
+              class="form-control"
+              autocomplete="new-data"
+              [ngClass]="ngClassValidate(group, 'note')"
+            >
+            </textarea>
+            <div *ngIf="submit && f" class="invalid-feedback">
+              <div *ngIf="f['note'].errors">Title should be valid</div>
+            </div>
+          </div>
+
+
+          <div class="col-12">
+            <label for="status">Status</label>
+            <ng-select
+              formControlName="status"
+              [items]="statusItems"
+              bindLabel="label"
+              labelForId="status"
+              [multiple]="false"
+              autocomplete="off"
+              placeholder="status"
+              [clearable]="true"
+              clearAllText="x"
+              [ngClass]="ngClassValidate(group, 'status')"
+              name="status"
+            >
+            </ng-select>
+            <div *ngIf="submit && f" class="invalid-feedback">
+              <div *ngIf="f['status'].errors">The status must be valid</div>
+            </div>
+          </div>
+
+
+          <div class="col-md-2 mb-3 float-end align-self-end ms-auto">
+            <button type="submit" class="btn w-100 btn-primary w-md mt-4">
+              save
+            </button>
+          </div>
+        </form>
+
+        <div class="card-body" *ngIf="employeesData?.length > 0">
+
+
+          <div class="mb-4">
+            <h4>Check date: <span style="color: darkblue">{{timesheet.checkDate | date : "EEEE MMM dd yyyy"}}</span></h4>
+            <h4>From date <span style="color: darkblue">{{timesheet.paymentPeriodStartDate | date : "EEEE MMM dd yyyy"}}</span> to date <span style="color: darkblue">{{timesheet.paymentPeriodEndDate | date : "EEEE MMM dd yyyy"}}</span></h4>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-centered table-hover align-middle">
+              <thead>
+                <tr>
+                  <th sortable="name" class="w-30">
+                    Name
+                  </th>
+                  <th>Payment Amount</th>
+                  <th>Payment Type</th>
+                  <th>Hours</th>
+                  <th>Gross salary</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of employeesData">
+                  <th scope="row">{{ data.name }}</th>
+
+                  <td>{{ data.paymentAmount | punctuation }}</td>
+                  <td>{{ data.paymentType?.name }}</td>
+                  <td>{{ data.hours }}</td>
+                  <td>
+                    {{
+                      (data.paymentType?.name === "hour" && data.hours
+                        ? (data.paymentAmount * data.hours)
+                        : data.paymentAmount) | punctuation
+                    }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 class="mt-4">Gross Payroll: <span class="text-success ms-2">{{(employeesData | totalPayroll) | punctuation}}</span></h3>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

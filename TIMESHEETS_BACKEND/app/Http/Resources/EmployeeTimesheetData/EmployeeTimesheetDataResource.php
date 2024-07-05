@@ -5,6 +5,7 @@ namespace App\Http\Resources\EmployeeTimesheetData;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\Employee\EmployeeResource;
 
 class EmployeeTimesheetDataResource extends JsonResource
 {
@@ -23,7 +24,7 @@ class EmployeeTimesheetDataResource extends JsonResource
         $response = collect(
             [
                 'id'             => $this->resource->id,
-				'employee' => $this->resource->employee
+				'employee' => EmployeeResource::make($this->resource->employee)
             ]
         );
 

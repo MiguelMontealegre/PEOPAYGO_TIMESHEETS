@@ -53,6 +53,9 @@ export class EditFormComponent
     day: new Date().getDate(),
   };
 
+  status: string;
+  note: string;
+
   constructor(
     private route: ActivatedRoute,
     @Inject('TimesheetService')
@@ -193,6 +196,8 @@ export class EditFormComponent
 
   private init(timesheet: Timesheet) {
     this.editing = true;
+    this.status = timesheet.status;
+    this.note = timesheet.note;
     this.timesheetId = timesheet.id;
     this.clientCompanyId = timesheet.clientCompany.id;
     this.group.patchValue({

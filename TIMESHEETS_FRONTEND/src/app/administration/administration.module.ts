@@ -8,10 +8,12 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 
 import { AdministrationRoutingModule } from './administration-routing.module';
+import { ClientCompany } from '@models/client-company/client-company.model';
 import { CommonModule } from '@angular/common';
 import { EventService } from '@services/layout/event.service';
 import { LayoutModule } from './modules/layout/layout.module';
 import { LightboxModule } from 'ngx-lightbox';
+import { ModelService } from '@services/common/model.service';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { NgModule } from '@angular/core';
 import { NgSelectModule } from '@ng-select/ng-select';
@@ -42,6 +44,8 @@ import { WidgetModule } from '@modules/widget/widget.module';
     LayoutModule,
     LightboxModule,
   ],
-  providers: [EventService],
+  providers: [
+    EventService
+  ],
 })
 export class AdministrationModule {}

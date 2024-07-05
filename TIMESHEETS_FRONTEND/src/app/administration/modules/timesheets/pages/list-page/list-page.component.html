@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <app-page-title
-    title="Employees"
+    title="Timesheets"
     [breadcrumbItems]="breadCrumbs"></app-page-title>
 
   <div class="row">
@@ -21,9 +21,6 @@
                 <a (click)="clear()" class="btn btn-light" id="clearSearch"
                   ><i class="mdi mdi-refresh"></i
                 ></a>
-                <a [routerLink]="['forms']" class="btn btn-primary" id="cron-job">
-                  <i class="bx bx-plus-medical align-middle"></i>
-                </a>
               </div>
             </div>
           </div>
@@ -35,23 +32,39 @@
               <thead>
                 <tr>
                   <th sortable="name" (sort)="onSort($event)" class="w-30">
-                    Name
+                    Title
                   </th>
-                  <th>Payment Amount</th>
-                  <th>Payment Type</th>
-                  <th>Hours</th>
-                  <th>Gross salary</th>
+                  <th>Status</th>
+                  <th>Note</th>
+                  <th>Check Date</th>
+                  <th>Payment Period Start Date</th>
+                  <th>Payment Period End Date</th>
                   <th scope="col" width="300px">Actions</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let data of (service.collection$ | async)?.data">
-                  <th scope="row">{{ data.name }}</th>
+                <tr *ngFor="let data of (service.collection$ | async)?.data; let i = index">
+                  <th scope="row">{{ data.title }}</th>
 
-                  <td>{{ data.paymentAmount | punctuation }}</td>
-                  <td>{{data.paymentType.name}}</td>
-                  <td>{{data.hours}}</td>
-                  <td>{{(data.paymentType?.name === 'hour' && data.hours ? data.paymentAmount * data.hours : data.paymentAmount) | punctuation}}</td>
+                  <td>
+                    <ng-container *ngIf="!editingStatus || editingIndex !== i">
+                      <span class="fw-bold text-primary">{{data.status}}</span>
+                      <button (click)="editStatus(data,i)" class="btn btn-sm btn-outline-primary ms-2"><i class="bx bx-edit-alt"></i></button>
+                    </ng-container>
+
+                    <ng-container *ngIf="editingStatus && editingIndex === i">
+                      <select class="form-select mb-2" [(ngModel)]="data.status" name="status">
+                        <option *ngFor="let item of statusItems" [value]="item.value">{{ item.label }}</option>
+                      </select>
+                      <button (click)="saveStatus(data)" class="btn btn-sm btn-primary me-2"><i class="bx bx-check"></i> Guardar</button>
+                      <button (click)="cancelEdit()" class="btn btn-sm btn-secondary"><i class="bx bx-x"></i> Cancelar</button>
+                    </ng-container>
+                  </td>
+
+                  <td>{{data.note}}</td>
+                  <td>{{data.checkDate | date : "EEEE MMM dd yyyy"}}</td>
+                  <td>{{data.paymentPeriodStartDate | date : "EEEE MMM dd yyyy"}}</td>
+                  <td>{{data.paymentPeriodEndDate | date : "EEEE MMM dd yyyy"}}</td>
                   <td>
                     <div class="d-flex gap-1 justify-content-start">
                       <a
