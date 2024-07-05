@@ -1,6 +1,17 @@
 /* Importing Bootstrap SCSS file. */
 // @import '~bootstrap/scss/bootstrap';
 
+
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "assets/scss/variables";
+@import 'bootstrap/scss/bootstrap';
+@import 'assets/scss/custom/plugins/bs-datepicker';
+
+
+@import 'assets/scss/custom/plugins/timepicker';
+@import 'assets/scss/custom/plugins/datepicker';
+
 /* You can add global styles to this file, and also import other style files */
 .modal-holder {
   animation-name: example;
@@ -28,5 +39,6 @@
   position: relative !important;
   opacity: 1;
 }
+
 
 

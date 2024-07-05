@@ -6,9 +6,9 @@ import { CollectionComponent } from '@components/abstract/collection.component';
 import { CollectionService } from '@services/common/collection.service';
 import { CommonApiService } from '@services/common/common-api.service';
 import { Component } from '@angular/core';
-import { Employee } from '@models/employees/employee.model';
 import { Location } from '@angular/common';
 import Swal from 'sweetalert2';
+import { Timesheet } from '@models/timesheets/timesheet.model';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -16,14 +16,14 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './list-page.component.html',
   providers: [
     CollectionService,
-    { provide: 'API_SERVICE', useValue: 'employees' },
+    { provide: 'API_SERVICE', useValue: 'timesheets' },
     CommonApiService,
   ],
 })
-export class ListPageComponent extends CollectionComponent<Employee> {
+export class ListPageComponent extends CollectionComponent<Timesheet> {
   breadCrumbs = [
     { label: 'Client Company', active: true },
-    { label: 'Employees', active: true },
+    { label: 'Timesheets', active: true },
   ];
 
   constructor(
@@ -31,11 +31,11 @@ export class ListPageComponent extends CollectionComponent<Employee> {
     router: Router,
     location: Location,
     api: CommonApiService,
-    service: CollectionService<Employee>,
+    service: CollectionService<Timesheet>,
     private toastr: ToastrService,
     public authenticationService: AuthenticationService,
   ) {
-    super(router, location, ``, api, service, 10, 'name', [], [
+    super(router, location, ``, api, service, 10, 'title', [], [
       {
         key: 'clientCompanies',
         values: [route.snapshot.data.clientCompany!.id],
@@ -43,10 +43,10 @@ export class ListPageComponent extends CollectionComponent<Employee> {
     ]);
   }
 
-  delete(model: Employee) {
+  delete(model: Timesheet) {
     Swal.fire({
       title: 'Are you sure?',
-      text: `This action remove ${model.name} from Model Bot!`,
+      text: `This action remove ${model.title}!`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#07B59A',
@@ -55,9 +55,9 @@ export class ListPageComponent extends CollectionComponent<Employee> {
     }).then(result => {
       if (result.value) {
         this.api.delete<ApiResponse>(`/${model.id}`).subscribe(
-          dataSetDeletion => {
+          timesheetDeletion => {
             this.clear();
-            this.toastr.success(dataSetDeletion?.message || 'Changes applied.');
+            this.toastr.success(timesheetDeletion?.message || 'Changes applied.');
           },
           errorDataSetDeletion => {
             this.toastr.error(

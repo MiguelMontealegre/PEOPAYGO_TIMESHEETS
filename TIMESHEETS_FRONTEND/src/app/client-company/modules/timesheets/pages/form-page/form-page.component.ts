@@ -11,31 +11,31 @@ import { validate as uuidValidate } from 'uuid';
 import { takeUntil } from 'rxjs/operators';
 import { tap } from 'rxjs';
 import { ActivatedRoute } from "@angular/router";
-import { Employee } from "@models/employees/employee.model";
+import { Timesheet } from "@models/timesheets/timesheet.model";
 
 @Component({
   selector: "app-forms-page",
   templateUrl: "./form-page.component.html",
   styleUrls: ["./form-page.component.scss"],
   providers: [
-    { provide: 'API_SERVICE', useValue: 'employees' },
+    { provide: 'API_SERVICE', useValue: 'timesheets' },
     CommonApiService,
     {
-      provide: 'EmployeeService',
-      useFactory: () => new ModelService<Employee>(),
+      provide: 'TimesheetService',
+      useFactory: () => new ModelService<Timesheet>(),
     },
   ],
 })
 export class FormPageComponent extends CommonPageComponent implements OnInit {
   constructor(
     private api: CommonApiService,
-    @Inject('EmployeeService')
-    public employeeService: ModelService<Employee>,
+    @Inject('TimesheetService')
+    public timesheetService: ModelService<Timesheet>,
     private route: ActivatedRoute
   ) {
-    super('Employee', [
+    super('Timesheet', [
       { label: 'Client Company', route: '../../' },
-      { label: 'Employees', route: '../' },
+      { label: 'Timesheet', route: '../' },
     ]);
   }
 
@@ -54,18 +54,18 @@ export class FormPageComponent extends CommonPageComponent implements OnInit {
           } else {
             this.breadCrumbs.push({ label: 'Create', active: true });
           }
-          this.employeeService.isLoading = true;
+          this.timesheetService.isLoading = true;
         }),
         switchMap(id => {
           return id
-            ? this.api.get<Employee>(`/${id}`, { limit: 50, page: 1 },)
+            ? this.api.get<Timesheet>(`/${id}`, { limit: 50, page: 1 },)
             : of(null);
         }),
         takeUntil(this.destroy$)
       )
       .subscribe(model => {
-        this.employeeService.isLoading = false;
-        this.employeeService.set(model);
+        this.timesheetService.isLoading = false;
+        this.timesheetService.set(model);
       });
     this.unsubscribe.push(subscribe);
   }
