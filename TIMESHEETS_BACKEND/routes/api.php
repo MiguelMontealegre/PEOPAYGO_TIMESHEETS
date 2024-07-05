@@ -42,6 +42,7 @@ use App\Http\Controllers\ClientCompany\ClientCompanyDetail;
 use App\Http\Controllers\ClientCompany\ClientCompanyUpdate;
 use App\Http\Controllers\MediaEntity\MediaEntityController;
 use App\Http\Controllers\PaymentType\PaymentTypeController;
+use App\Http\Controllers\ClientCompany\ClientCompanyController;
 use App\Http\Controllers\EmployeeTimesheetData\EmployeeTimesheetDataList;
 use App\Http\Controllers\EmployeeTimesheetData\EmployeeTimesheetDataDelete;
 use App\Http\Controllers\EmployeeTimesheetData\EmployeeTimesheetDataDetail;
@@ -133,7 +134,7 @@ Route::prefix('client-companies')
     ->group(function () {
         Route::get('/', [ClientCompanyList::class, 'list']);
         Route::get('/{clientCompany}', [ClientCompanyDetail::class, 'show']);
-        Route::post('/', [ClientCompanyCreate::class, 'create']);
+        Route::post('/', [ClientCompanyController::class, 'createClientCompany']);
         Route::put('/{clientCompany}', [ClientCompanyUpdate::class, 'update']);
         Route::delete('/{clientCompany}', [ClientCompanyDelete::class, 'delete']);
 });

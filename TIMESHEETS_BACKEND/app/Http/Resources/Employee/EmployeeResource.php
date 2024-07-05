@@ -26,6 +26,7 @@ class EmployeeResource extends JsonResource
                 'name'           => $this->resource->name,
 				'paymentAmount'           => $this->resource->paymentAmount,
 				'paymentType'           => $this->resource->paymentType,
+				'clientCompany' => $this->resource->clientCompany
             ]
         );
 

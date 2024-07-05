@@ -227,7 +227,7 @@ class User extends Authenticatable
 
 
 
-	public function modelBot(): HasOne
+	public function clientCompany(): HasOne
     {
         return $this->hasOne(ClientCompany::class, 'userId');
     }

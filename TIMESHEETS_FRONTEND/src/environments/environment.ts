@@ -22,7 +22,6 @@ export const environment = {
     accountId: '1012620',
     apiKey: 'GUWYj9YrFMBY3tpS79Lg7L50yF'
   },
-  // api: 'https://lazomascotas.com:8000/api',
   api: 'http://localhost:8000/api',
 };
 

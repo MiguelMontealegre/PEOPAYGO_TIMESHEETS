@@ -40,6 +40,10 @@ class EmployeeRequest extends FormRequest
                 'required',
                 'exists:paymentTypes,id',
             ],
+			'clientCompanyId'      => [
+                'required',
+                'exists:clientCompanies,id',
+            ],
         ];
 
     }//end rules()
