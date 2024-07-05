@@ -11,8 +11,16 @@ use App\Http\Controllers\Media\MediaDetail;
 use App\Http\Controllers\Media\MediaUpdate;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Employee\EmployeeList;
 use App\Http\Controllers\Media\MediaController;
+use App\Http\Controllers\Employee\EmployeeCreate;
+use App\Http\Controllers\Employee\EmployeeDelete;
+use App\Http\Controllers\Employee\EmployeeDetail;
+use App\Http\Controllers\Employee\EmployeeUpdate;
+use App\Http\Controllers\Timesheet\TimesheetList;
 use App\Http\Controllers\Auth\LoginUserController;
+use App\Http\Controllers\Timesheet\TimesheetDelete;
+use App\Http\Controllers\Timesheet\TimesheetDetail;
 use App\Http\Controllers\Auth\RegisterUserController;
 use App\Http\Controllers\MediaEntity\MediaEntityList;
 use App\Http\Controllers\PaymentType\PaymentTypeList;
@@ -26,7 +34,12 @@ use App\Http\Controllers\PaymentType\PaymentTypeCreate;
 use App\Http\Controllers\PaymentType\PaymentTypeDelete;
 use App\Http\Controllers\PaymentType\PaymentTypeDetail;
 use App\Http\Controllers\PaymentType\PaymentTypeUpdate;
+use App\Http\Controllers\ClientCompany\ClientCompanyList;
 use App\Http\Controllers\Auth\PasswordTokenCheckController;
+use App\Http\Controllers\ClientCompany\ClientCompanyCreate;
+use App\Http\Controllers\ClientCompany\ClientCompanyDelete;
+use App\Http\Controllers\ClientCompany\ClientCompanyDetail;
+use App\Http\Controllers\ClientCompany\ClientCompanyUpdate;
 use App\Http\Controllers\MediaEntity\MediaEntityController;
 use App\Http\Controllers\PaymentType\PaymentTypeController;
 
@@ -95,11 +108,42 @@ Route::prefix('payment-types')
     ->group(function () {
         Route::get('/', [PaymentTypeList::class, 'list']);
 		Route::get('/all', [PaymentTypeController::class, 'getPaymentTypesList']);
-        Route::get('/{tag}', [PaymentTypeDetail::class, 'show']);
+        Route::get('/{paymentType}', [PaymentTypeDetail::class, 'show']);
         Route::post('/', [PaymentTypeCreate::class, 'create']);
-        Route::put('/{tag}', [PaymentTypeUpdate::class, 'update']);
-        Route::delete('/{tag}', [PaymentTypeDelete::class, 'delete']);
+        Route::put('/{paymentType}', [PaymentTypeUpdate::class, 'update']);
+        Route::delete('/{paymentType}', [PaymentTypeDelete::class, 'delete']);
 });
+
+
+Route::prefix('employees')
+    ->group(function () {
+        Route::get('/', [EmployeeList::class, 'list']);
+        Route::get('/{employee}', [EmployeeDetail::class, 'show']);
+        Route::post('/', [EmployeeCreate::class, 'create']);
+        Route::put('/{employee}', [EmployeeUpdate::class, 'update']);
+        Route::delete('/{employee}', [EmployeeDelete::class, 'delete']);
+});
+
+
+
+Route::prefix('client-companies')
+    ->group(function () {
+        Route::get('/', [ClientCompanyList::class, 'list']);
+        Route::get('/{clientCompany}', [ClientCompanyDetail::class, 'show']);
+        Route::post('/', [ClientCompanyCreate::class, 'create']);
+        Route::put('/{clientCompany}', [ClientCompanyUpdate::class, 'update']);
+        Route::delete('/{clientCompany}', [ClientCompanyDelete::class, 'delete']);
+});
+
+
+
+Route::prefix('timesheets')
+    ->group(function () {
+        Route::get('/', [TimesheetList::class, 'list']);
+        Route::get('/{timesheet}', [TimesheetDetail::class, 'show']);
+        Route::delete('/{timesheet}', [TimesheetDelete::class, 'delete']);
+});
+
 
 
 /** Media Routes */

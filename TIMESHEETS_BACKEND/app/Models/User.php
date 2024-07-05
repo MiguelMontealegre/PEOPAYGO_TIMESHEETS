@@ -11,6 +11,7 @@ use App\Traits\UuidTrait;
 use App\Models\ApiService;
 use App\Models\Media\Media;
 use Illuminate\Http\Request;
+use App\Models\ClientCompany;
 use Laravel\Cashier\Billable;
 use Laravel\Scout\Searchable;
 use App\Models\ProductComment;
@@ -222,6 +223,14 @@ class User extends Authenticatable
         return $this->hasMany(Location::class, 'locationableId');
 
     }//end locations()
+
+
+
+
+	public function modelBot(): HasOne
+    {
+        return $this->hasOne(ClientCompany::class, 'userId');
+    }
 
 
 }//end class
