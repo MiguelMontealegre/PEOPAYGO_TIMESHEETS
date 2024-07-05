@@ -45,51 +45,6 @@ export class HomePageComponent extends CommonComponent implements OnInit {
   currentSection = 'home';
   cookieValue = '';
 
-  carouselOption: OwlOptions = {
-    items: 3,
-    loop: true,
-    margin: 40,
-    autoplay: true,
-    autoplayTimeout: 3000,
-    autoplayHoverPause: true,
-    nav: false,
-    dots: true,
-    responsive: {
-      0: {
-        items: 1,
-      },
-      480: {
-        items: 2,
-      },
-      768: {
-        items: 3,
-      },
-    },
-  }
-
-  timelineCarousel: OwlOptions = {
-    items: 1,
-    loop: false,
-    margin: 0,
-    nav: true,
-    navText: ["<i class='mdi mdi-chevron-left'></i>", "<i class='mdi mdi-chevron-right'></i>"],
-    dots: false,
-    responsive: {
-      672: {
-        items: 3
-      },
-
-      576: {
-        items: 2
-      },
-
-      936: {
-        items: 4
-      },
-    }
-  }
-
-
   private _trialEndsAt;
 
   private _diff: number;
@@ -145,26 +100,6 @@ export class HomePageComponent extends CommonComponent implements OnInit {
     }
   ];
 
-  countCart = 0;
-  apiLoaded = false;
-  key = environment.maps;
-  center: google.maps.LatLngLiteral = { lat: 4.602713189186805, lng: -74.08392418343502 };
-  zoomLevel?: number = 10;
-  markerOptions: google.maps.MarkerOptions = {
-    draggable: false,
-  };
-  markers1 = [
-    {
-      lat: 4.60149330902331,
-      lng: -74.08055181535654,
-    }
-  ]
-  markers2 = [
-    {
-      lat: 4.602713189186805,
-      lng: -74.08392418343502,
-    }
-  ]
 
   constructor(
     private title: Title,
@@ -181,13 +116,6 @@ export class HomePageComponent extends CommonComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private api: CommonApiService) {
     super();
-    this.meta.addTag({
-      name: 'description',
-      content:
-        `Designed to provide accurate and detailed information on a wide range of topics. This feature is based on two key components: Extensive Integrated Knowledge and Internet Search for Updated or Specific Information.
-         Also Build your AI based on a personalized knowledge base, such files, web urls, videos.
-         For companies Turn your customer questions into dynamic conversations, powered by the speed and precision of our AI `
-    });
     this.title.setTitle(
       'Timesheets '
     );
@@ -289,18 +217,6 @@ export class HomePageComponent extends CommonComponent implements OnInit {
 
   redirectToExternalAuth(key: string): void {
     window.location.href = this.externalAuthUrl + `?role=SINGLE_USER&provider=${key}`;
-  }
-
-  zoomChanged(level: number | undefined) {
-    this.zoomLevel = level;
-  }
-  goWhosale(): void {
-
-    if (this.isLoggedIn) {
-      this.toastr.error('No puedes Registrarte como Mayorista, primero debes Cerrar la Session Actual ')
-    } else {
-      this.router.navigate(['./wholesale-form'])
-    }
   }
 
   redirectTo() {
