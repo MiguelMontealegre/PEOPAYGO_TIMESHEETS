@@ -15,6 +15,7 @@ import { ThemeService } from '@services/layout/theme-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { User } from '@models/account/user.model';
 import { environment } from '@environments/environment';
+import { getRouteByRole } from '@functions/routing';
 import { interval } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { of } from 'rxjs';
@@ -144,7 +145,7 @@ export class HomePageComponent extends CommonComponent implements OnInit {
     }
   ];
 
-  countCart= 0;
+  countCart = 0;
   apiLoaded = false;
   key = environment.maps;
   center: google.maps.LatLngLiteral = { lat: 4.602713189186805, lng: -74.08392418343502 };
@@ -188,7 +189,7 @@ export class HomePageComponent extends CommonComponent implements OnInit {
          For companies Turn your customer questions into dynamic conversations, powered by the speed and precision of our AI `
     });
     this.title.setTitle(
-      'Lazo '
+      'Timesheets '
     );
     this.cookieValue = this.cookiesService.get('lang');
     const modeAttribute = this.themeService.getTheme();
@@ -295,11 +296,18 @@ export class HomePageComponent extends CommonComponent implements OnInit {
   }
   goWhosale(): void {
 
-    if(this.isLoggedIn){
-    this.toastr.error('No puedes Registrarte como Mayorista, primero debes Cerrar la Session Actual ')
-  }else
-  {
-    this.router.navigate(['./wholesale-form'])
+    if (this.isLoggedIn) {
+      this.toastr.error('No puedes Registrarte como Mayorista, primero debes Cerrar la Session Actual ')
+    } else {
+      this.router.navigate(['./wholesale-form'])
+    }
   }
-}
+
+  redirectTo() {
+    if (this.authenticationService.authService.model) {
+      this.router.navigate([getRouteByRole(this.authenticationService.authService.model)]).then();
+    } else {
+      this.router.navigate(['/account/auth/signup-2']).then();
+    }
+  }
 }

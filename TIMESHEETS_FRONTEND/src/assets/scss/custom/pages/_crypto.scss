@@ -162,7 +162,7 @@
     left: 0;
     top: 0;
     opacity: 0.7;
-    background-color: $black;
+    // background-color: $black;
 }
 
 .hero-section{
@@ -170,7 +170,7 @@
     padding-bottom: 190px;
 
     &.bg-ico-hero{
-        background-image: url("../../../images/homepage/main-banner.png");
+        background-image: url("../../../images/logos/fondo.png");
         background-size: cover;
         background-position: top;
     }

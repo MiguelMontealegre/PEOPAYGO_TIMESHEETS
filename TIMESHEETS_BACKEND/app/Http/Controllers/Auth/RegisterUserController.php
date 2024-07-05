@@ -75,7 +75,7 @@ class RegisterUserController extends Controller
                 'urlSlug' => UserHelper::createUniqueUserSlug($request->input('firstName'), $request->input('lastName')),
             ]
         );
-        $role = Role::query()->where('name', UserRoleEnum::SINGLE_USER->name)->first();
+        $role = Role::query()->where('name', UserRoleEnum::CLIENT_USER->name)->first();
         UserRole::query()->create(
             [
                 'userId' => $user->id,
@@ -229,134 +229,16 @@ class RegisterUserController extends Controller
      * @return JsonResponse
      */
     public function emailConfirmation(User $user)
-    {
-
-
-
-    
+    {    
         $rol = $user->rolesArray();
         if (!empty($user->emailConfirmedAt)) {
-            if(in_array('WHOLESALE_USER', $rol))
-            {
-                return Redirect()->to(env('EMAIL_CONFIRMED_SUCCESS_ROUTE') ?? 'https://lazomascotas.com:444/#/wholesale-pending');
-            }
-            return Redirect()->to(env('EMAIL_CONFIRMED_SUCCESS_ROUTE') ?? 'https://lazomascotas.com:444/#/account/auth/confirm-mail');
+            return Redirect()->to(env('EMAIL_CONFIRMED_SUCCESS_ROUTE'));
         }
-        if (in_array('WHOLESALE_USER', $rol)) {
-            $recipientEmails = User::whereHas('roles', function ($query) {
-                $query->where('name', 'ADMIN');
-            })->pluck('email')->toArray();
-            $wholesaleUser = WholesaleUsers::where('userId', $user->id)->first();
-            Mail::to($recipientEmails)->send(new SendConfirmationWholesale($user, $wholesaleUser));
-
-        }
-        ## Send email to user
         $user->emailConfirmedAt = Carbon::now();
         $user->save();
-
         
-        $confirmSuccess = env('EMAIL_CONFIRMED_SUCCESS_ROUTE') ?? 'https://lazomascotas.com:444/#/account/auth/confirm-mail';
-        if(in_array('WHOLESALE_USER', $rol)){
-            $confirmSuccess = env('EMAIL_CONFIRMED_SUCCESS_ROUTE') ?? 'https://lazomascotas.com:444/#/wholesale-pending';
-        }
+        $confirmSuccess = env('EMAIL_CONFIRMED_SUCCESS_ROUTE');
         return redirect()->to($confirmSuccess);
-
-        // return response()
-        //     ->json(['message' => 'Email Confirmed'])
-        //     ->setStatusCode(ResponseAlias::HTTP_OK);
-
     } //end emailConfirmation()
 
-    public function registerWholeSaleUser(WholesaleUserRequest $request)
-    {
-        /**
-         * @var User $user
-         */
-        $user = User::query()
-            ->create(
-                [
-                    'email' => $request->input('email'),
-                    'password' => Hash::make($request->input('password')),
-                ]
-            );
-        UserProfile::query()->create(
-            [
-                'userId' => $user->id,
-                'firstName' => $request->input('firstName'),
-                'lastName' => $request->input('lastName'),
-                'urlSlug' => UserHelper::createUniqueUserSlug($request->input('firstName'), $request->input('lastName')),
-            ]
-        );
-        $role = Role::query()->where('name', UserRoleEnum::WHOLESALE_USER->name)->first();
-        UserRole::query()->create(
-            [
-                'userId' => $user->id,
-                'roleId' => $role->id,
-            ]
-        );
-        WholesaleUsers::query()->create(
-            [
-                'userId' => $user->id,
-                'companyName' => $request->input('companyName'),
-                'phone' => $request->input('phone'),
-                'address' => $request->input('address'),
-                'companySize' => $request->input('companySize'),
-                'rutMediaId' => $request->input('mediaId'),
-            ]
-        );
-
-        ## Send email to user
-        $sendEmail = Mail::to($request->input('email'))->send(new SendConfirmationRegistration($user));
-
-        $html = view('mail.confirm-registration', ['user' => $user])->render();
-
-        EmailTracking::create(
-            [
-                'emailId' => Str::replace(["<", ">"], "", $sendEmail->getMessageId()),
-                'sender' => $sendEmail->getEnvelope()->getSender()->getAddress(),
-                'receiver' => $request->input('email'),
-                'body' => $html,
-                'userId' => $user->id,
-                'active' => 1,
-                'status' => SentEmailStatus::QUEUE->value,
-                'type' => EmailTrackingTypes::CONFIRM_REGISTRATION->value,
-            ]
-        );
-
-        $response = [
-            'user' => UserResource::make($user),
-            'token' => $user->createToken('auth_token'),
-        ];
-        return response()
-            ->json($response)
-            ->setStatusCode(Response::HTTP_CREATED);
-
-    }
-
-    public function wholeSaleDenail(User $user){
-        $wholesaleUser = WholesaleUsers::where('userId', $user->id)->first();
-        if($wholesaleUser == null){
-            return Redirect()->to(env('EMAIL_CONFIRMED_SUCCESS_ROUTE') ?? 'https://lazomascotas.com:444/#/');
-        }
-        $user= $wholesaleUser->user;
-        $rolUser= UserRole::query()->where('userId', $user->id)->first();
-        $wholesaleUser->delete();
-        $role = Role::query()->where('name', UserRoleEnum::SINGLE_USER->name)->first();
-        $rolUser->roleId = $role->id;
-        $rolUser->save();
-        Mail::to($user->email)->send(new SendInfoWholesaleFail($user));
-        return Redirect()->to(env('EMAIL_CONFIRMED_SUCCESS_ROUTE') ?? 'https://lazomascotas.com:444/#/');
-    }
-
-    public function wholeSaleApprove(User $user){
-        
-        $wholesaleUser = WholesaleUsers::where('userId', $user->id)->first();
-        if($wholesaleUser == null){
-            return Redirect()->to(env('EMAIL_CONFIRMED_SUCCESS_ROUTE') ?? 'https://lazomascotas.com:444/#/');
-        }
-        $wholesaleUser->isApproved = true;
-        $wholesaleUser->save();
-        Mail::to($user->email)->send(new SendInfoWholesaleOk($user));
-        return Redirect()->to(env('EMAIL_CONFIRMED_SUCCESS_ROUTE') ?? 'https://lazomascotas.com:444/#/');
-    }
  } //end class
