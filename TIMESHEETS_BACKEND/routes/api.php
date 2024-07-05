@@ -42,6 +42,9 @@ use App\Http\Controllers\ClientCompany\ClientCompanyDetail;
 use App\Http\Controllers\ClientCompany\ClientCompanyUpdate;
 use App\Http\Controllers\MediaEntity\MediaEntityController;
 use App\Http\Controllers\PaymentType\PaymentTypeController;
+use App\Http\Controllers\EmployeeTimesheetData\EmployeeTimesheetDataList;
+use App\Http\Controllers\EmployeeTimesheetData\EmployeeTimesheetDataDelete;
+use App\Http\Controllers\EmployeeTimesheetData\EmployeeTimesheetDataDetail;
 
 /** Open Routes */
 Route::prefix('users')
@@ -142,6 +145,15 @@ Route::prefix('timesheets')
         Route::get('/', [TimesheetList::class, 'list']);
         Route::get('/{timesheet}', [TimesheetDetail::class, 'show']);
         Route::delete('/{timesheet}', [TimesheetDelete::class, 'delete']);
+});
+
+
+
+Route::prefix('employee-timesheet-Data')
+    ->group(function () {
+        Route::get('/', [EmployeeTimesheetDataList::class, 'list']);
+        Route::get('/{employeeTimesheetData}', [EmployeeTimesheetDataDetail::class, 'show']);
+        Route::delete('/{employeeTimesheetData}', [EmployeeTimesheetDataDelete::class, 'delete']);
 });
 
 

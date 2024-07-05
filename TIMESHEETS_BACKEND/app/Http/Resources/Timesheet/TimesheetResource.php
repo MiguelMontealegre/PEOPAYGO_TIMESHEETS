@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Http\Resources\Timesheet;
 
+use App\Http\Resources\EmployeeTimesheetData\EmployeeTimesheetDataResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -27,6 +28,7 @@ class TimesheetResource extends JsonResource
 				'status'           => $this->resource->status,
 				'note'           => $this->resource->note,
 				'checkDate'           => $this->resource->checkDate,
+				'employeeTimesheetData'       => EmployeeTimesheetDataResource::collection($this->whenLoaded('employeeTimesheetData')),
 				'paymentPeriodStartDate'           => $this->resource->paymentPeriodStartDate,
 				'paymentPeriodEndDate'           => $this->resource->paymentPeriodEndDate,
             ]
