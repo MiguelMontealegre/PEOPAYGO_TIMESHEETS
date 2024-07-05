@@ -1,3 +1,4 @@
+import { ClientCompanyFormComponent } from './pages/client-company-form/client-company-form.component';
 import { CommonModule } from '@angular/common';
 import { DetailPageComponent } from './pages/detail-page/detail-page.component';
 import { FormPageComponent } from './pages/form-page/form-page.component';
@@ -14,7 +15,7 @@ import { UiModule } from '@modules/ui/ui.module';
 import { UiSwitchModule } from 'ngx-ui-switch';
 
 @NgModule({
-  declarations: [FormPageComponent, DetailPageComponent, PasswordPageComponent],
+  declarations: [FormPageComponent, DetailPageComponent, PasswordPageComponent, ClientCompanyFormComponent],
   imports: [
     CommonModule,
     ProfileRoutingModule,
@@ -24,7 +25,7 @@ import { UiSwitchModule } from 'ngx-ui-switch';
     UiSwitchModule,
     NgSelectModule,
     TranslateModule,
-    LightboxModule
+    LightboxModule,
   ],
   providers: [
   ]

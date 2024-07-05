@@ -1,5 +1,8 @@
 import { RouterModule, Routes } from '@angular/router';
+
+import { ClientCompanyFormComponent } from './pages/client-company-form/client-company-form.component';
 import { DetailPageComponent } from './pages/detail-page/detail-page.component';
+import { EntityCreatedGuard } from 'src/app/core/guards/entity-created.guard';
 import { LayoutComponent } from '../layout/layout.component';
 import { MemberApiResolver } from '@resolvers/member-api.resolver';
 import { NgModule } from '@angular/core';
@@ -26,6 +29,12 @@ const routes: Routes = [
           {
             path: 'password',
             component: PasswordPageComponent,
+          },
+          {
+            path: 'client-company-form',
+            component: ClientCompanyFormComponent,
+            canActivate: [EntityCreatedGuard],
+            data: { roles: ['CLIENT_USER'], key: 'clientCompany' }
           },
         ],
       },

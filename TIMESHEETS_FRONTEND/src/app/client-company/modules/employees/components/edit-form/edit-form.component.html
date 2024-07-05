@@ -1,0 +1,73 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card-body border-bottom">
+      <div class="row">
+        <div class="col-12">
+          <h4 class="card-title d-flex">
+            Employee information
+          </h4>
+          <p class="card-title-desc">
+            Fill all information in order to create an employee
+          </p>
+        </div>
+
+
+        <form class="row" [formGroup]="group" (ngSubmit)="ngSubmit()">
+          <div class="col-md-6 mb-4" id="name">
+            <label for="name"> Name </label>
+            <input id="name" placeholder="Employee name" formControlName="name"
+              type="text" class="form-control" autocomplete="new-data" [ngClass]="ngClassValidate(group, 'name')" />
+            <div *ngIf="submit && f" class="invalid-feedback">
+              <div *ngIf="f['name'].errors">
+                Name should be valid
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-md-6 mb-4" id="paymentAmount">
+            <label for="paymentAmount"> Payment Amount </label>
+            <input id="paymentAmount" placeholder="Employee name" formControlName="paymentAmount"
+              type="number" class="form-control" autocomplete="new-data" [ngClass]="ngClassValidate(group, 'paymentAmount')" />
+            <div *ngIf="submit && f" class="invalid-feedback">
+              <div *ngIf="f['paymentAmount'].errors">
+                payment Amount should be valid
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="col-md-6 mb-3">
+            <label for="paymentTypeId">Role</label>
+            <ng-select
+              formControlName="paymentTypeId"
+              [items]="paymentTypeOptions"
+              bindLabel="name"
+              labelForId="paymentTypeId"
+              [multiple]="false"
+              autocomplete="off"
+              placeholder="Payment types"
+              [clearable]="true"
+              clearAllText="x"
+              [ngClass]="ngClassValidate(group, 'paymentTypeId')"
+              name="paymentTypeId">
+            </ng-select>
+            <div *ngIf="submit && f" class="invalid-feedback">
+              <div *ngIf="f['paymentTypeId'].errors">
+                The role must be valid
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-md-2 mb-3 float-end align-self-end ms-auto">
+            <button type="submit" class="btn w-100 btn-primary w-md mt-4">
+              save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

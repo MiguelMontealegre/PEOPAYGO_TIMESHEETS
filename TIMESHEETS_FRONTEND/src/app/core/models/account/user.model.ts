@@ -1,3 +1,4 @@
+import { ClientCompany } from '@models/client-company/client-company.model';
 import { Profile } from '@models/account/profile.model';
 import { RoleEntity } from './role-entity.model';
 
@@ -7,6 +8,9 @@ export interface User {
   firstName: string | null;
   lastName: string | null;
   email: string | null;
+
+  clientCompany?: ClientCompany
+
   emailVerifiedAt: null;
   emailConfirmedAt?: Date;
   rememberToken: string;

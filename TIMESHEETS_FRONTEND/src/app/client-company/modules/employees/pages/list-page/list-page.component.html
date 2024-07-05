@@ -1,0 +1,112 @@
+<div class="container-fluid">
+  <app-page-title
+    title="Employees"
+    [breadcrumbItems]="breadCrumbs"></app-page-title>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body border-bottom">
+          <div class="row justify-content-end">
+            <div class="col-md-5">
+              <div class="d-flex justify-content-end gap-2">
+                <input
+                  type="search"
+                  class="form-control"
+                  id="searchInput"
+                  placeholder="Search"
+                  [formControl]="searchControl"
+                  autocomplete="new-input" />
+
+                <a (click)="clear()" class="btn btn-light" id="clearSearch"
+                  ><i class="mdi mdi-refresh"></i
+                ></a>
+                <a [routerLink]="['forms']" class="btn btn-primary" id="cron-job">
+                  <i class="bx bx-plus-medical align-middle"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-centered table-hover align-middle">
+              <thead>
+                <tr>
+                  <th sortable="name" (sort)="onSort($event)" class="w-30">
+                    Name
+                  </th>
+                  <th>Payment Amount</th>
+                  <th>Payment Type</th>
+                  <th scope="col" width="300px">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of (service.collection$ | async)?.data">
+                  <th scope="row">{{ data.name }}</th>
+
+                  <td>{{ data.paymentAmount }}</td>
+                  <td>{{data.paymentType.name}}</td>
+                  <td>
+                    <div class="d-flex gap-1 justify-content-start">
+                      <a
+                        [routerLink]="'./forms/' + data.id"
+                        class="btn btn-sm btn-soft-secondary"
+                        ><i class="bx bxs-edit-alt"></i>&nbsp;Edit</a
+                      >
+                      <a
+                        (click)="delete(data)"
+                        class="btn btn-sm btn-danger"
+                        ><i class="fa fa-trash"></i>&nbsp;Delete</a
+                      >
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="row justify-content-between align-items-center">
+            <div class="col-auto me-auto">
+              <div class="dataTables_length" id="tickets-table_length">
+                <label class="d-inline-flex align-items-center"
+                  >Show
+                  <select
+                    aria-controls="tickets-table"
+                    name="pageSize"
+                    [formControl]="limitControl"
+                    class="custom-select custom-select-sm form-control form-control-sm mx-2">
+                    <option [ngValue]="10">10</option>
+                    <option [ngValue]="25">25</option>
+                    <option [ngValue]="50">50</option>
+                    <option [ngValue]="100">100</option>
+                  </select>
+                  Entries</label
+                >
+              </div>
+            </div>
+            <div class="col-auto me-auto">
+              <p class="mb-0">
+                show <b>{{ service.from }}</b> to <b>{{ service.to }}</b> of
+                <b>{{ service.total }}</b> entries
+              </p>
+            </div>
+
+            <div class="col-auto">
+              <ul
+                class="pagination pagination-rounded justify-content-end mb-2">
+                <ngb-pagination
+                  [maxSize]="3"
+                  [collectionSize]="service.total"
+                  [(page)]="service.page"
+                  [pageSize]="service.limit">
+                </ngb-pagination>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

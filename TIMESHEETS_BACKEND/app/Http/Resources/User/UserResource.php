@@ -36,6 +36,9 @@ class UserResource extends JsonResource
             'lastName'          => ($this->resource->profile) ? $this->resource->profile->lastName : null,
             'name'              => ($this->resource->profile) ? $this->resource->profile->firstName.' '.$this->resource->profile->lastName : null,
             'email'             => $this->resource->email,
+
+			'clientCompany'			=> $this->resource->clientCompany,
+
 			'emailConfirmedAt'  => $this->resource->emailConfirmedAt,
             'createdAt'         => $this->resource->createdAt->format('Y-m-d H:i:s'),
             'profile'           => UserProfileResource::make($this->resource->profile),

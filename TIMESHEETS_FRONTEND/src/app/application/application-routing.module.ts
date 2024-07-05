@@ -17,6 +17,15 @@ const routes: Routes = [
     data: { roles: ['ADMIN','MARKETER_USER','SALE_USER'] }
   },
   {
+    path: 'client-company',
+    loadChildren: () =>
+      import('../client-company/client-company.module').then(
+        m => m.ClientCompanyModule
+      ),
+    canActivate: [AuthGuard, RoleGuard],
+    data: { roles: ['ADMIN', 'CLIENT_USER'] }
+  },
+  {
     path: 'account',
     loadChildren: () =>
       import('../account/account.module').then(m => m.AccountModule),

@@ -19,7 +19,6 @@ import { PunctuationPipe } from '../../pipes/punctuation.pipe';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SortableDirective } from '../../directives/tables/sortable.directive';
-import {TranslateButtonComponent} from './translate-button/translate-buttton.component';
 import { UserMediaComponent } from './gallery-input/user-media/user-media.component';
 
 @NgModule({
@@ -30,7 +29,6 @@ import { UserMediaComponent } from './gallery-input/user-media/user-media.compon
     ImagesComponent,
     FileUploadComponent,
     NoDataComponent,
-    TranslateButtonComponent,
     GalleryInputComponent,
     GalleryModalComponent,
     UserMediaComponent,
@@ -47,7 +45,6 @@ import { UserMediaComponent } from './gallery-input/user-media/user-media.compon
     GalleryInputComponent,
     GalleryModalComponent,
     MediaInputComponent,
-    TranslateButtonComponent,
     PunctuationPipe
   ],
   imports: [

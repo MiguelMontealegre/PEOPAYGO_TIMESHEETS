@@ -1,10 +1,8 @@
 import { MenuItem } from '@models/layout/menu.model';
 import { User } from '@models/account/user.model';
-import { co } from '@fullcalendar/core/internal-common';
-import { first } from 'lodash';
 import { map } from 'lodash';
 
-export function   getRouteByRole(user: User): string {
+export function getRouteByRole(user: User): string {
   const roleNames = map(user.roles, r => r.name);
   if (roleNames.includes('ADMIN')) {
     return '/admin/users';
@@ -14,7 +12,11 @@ export function   getRouteByRole(user: User): string {
   ) {
     const role = user.roles.find(x => x.name === 'CLIENT_USER');
     if (role) {
-      return '/products/portal';
+      if(!user.clientCompany){
+        return `/account/profile/${user.id}/client-company-form`;
+      } else {
+        return `/client-company/${user.clientCompany.id}`;
+      }
     }
   }
   return '/';
@@ -36,12 +38,22 @@ export function getMenuByRole(user: User): MenuItem[] {
   ) {
     const role = user.roles.find(x => x.name === 'CLIENT_USER');
     if (role) {
-      menu.push({
-        id: 1,
-        label: 'Cliente Portal',
-        link: '/products/portal',
-        icon: 'bx bx-buildings',
-      });
+
+      if(!user.clientCompany){
+        menu.push({
+          id: 1,
+          label: 'Cliente Portal',
+          link: `/account/profile/${user.id}/client-company-form`,
+          icon: 'bx bx-buildings',
+        });
+      } else {
+        menu.push({
+          id: 1,
+          label: 'Cliente Portal',
+          link: `/client-company/${user.clientCompany.id}`,
+          icon: 'bx bx-buildings',
+        });
+      }
     }
   }
 
