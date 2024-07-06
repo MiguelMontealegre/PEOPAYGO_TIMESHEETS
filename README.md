@@ -29,7 +29,7 @@ http://localhost:4200/#/
 
 # BACKEND
 
-Deployed on http://54.160.199.184/
+Deployed with EC2 AWS on http://54.160.199.184/
 
 Acceder a la carpeta TIMESHEETS_BACKEND
 
