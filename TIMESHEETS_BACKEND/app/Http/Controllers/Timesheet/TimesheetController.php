@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Timesheet;
 
 use Carbon\Carbon;
 use App\Models\Timesheet;
+use App\Enums\TimesheetEnum;
 use Illuminate\Http\Request;
 use App\Models\User\UserProfile;
 use Illuminate\Http\JsonResponse;
@@ -73,7 +74,7 @@ class TimesheetController extends Controller
 	protected function adminEdit(Timesheet $timesheet, Request $request): JsonResponse
 	{
 
-		$status = $request->input('status', null);
+		$status = $request->input('status', isset($timesheet->status) ? $timesheet->status : TimesheetEnum::PENDING->name);
 		$note = $request->input('note', null);
 
 		$timesheet->update([
