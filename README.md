@@ -28,6 +28,9 @@ ng serve
 http://localhost:4200/#/
 
 # BACKEND
+
+Deployed on http://54.160.199.184/
+
 Acceder a la carpeta TIMESHEETS_BACKEND
 
 composer update
