@@ -111,6 +111,7 @@ Route::prefix('users')
 
 
 Route::prefix('payment-types')
+	->middleware([IsAdmin::class])
     ->group(function () {
         Route::get('/', [PaymentTypeList::class, 'list']);
 		Route::get('/all', [PaymentTypeController::class, 'getPaymentTypesList']);
@@ -122,6 +123,7 @@ Route::prefix('payment-types')
 
 
 Route::prefix('employees')
+	->middleware(['auth:sanctum'])
     ->group(function () {
         Route::get('/', [EmployeeList::class, 'list']);
 		Route::get('/all-from-company', [EmployeeController::class, 'getEmployeesList']);
@@ -134,6 +136,7 @@ Route::prefix('employees')
 
 
 Route::prefix('client-companies')
+	->middleware(['auth:sanctum'])
     ->group(function () {
         Route::get('/', [ClientCompanyList::class, 'list']);
         Route::get('/{clientCompany}', [ClientCompanyDetail::class, 'show']);
@@ -145,6 +148,7 @@ Route::prefix('client-companies')
 
 
 Route::prefix('timesheets')
+	->middleware(['auth:sanctum'])
     ->group(function () {
         Route::get('/', [TimesheetList::class, 'list']);
         Route::get('/{timesheet}', [TimesheetDetail::class, 'show']);
@@ -157,6 +161,7 @@ Route::prefix('timesheets')
 
 
 Route::prefix('employee-timesheet-Data')
+	->middleware(['auth:sanctum'])
     ->group(function () {
         Route::get('/', [EmployeeTimesheetDataList::class, 'list']);
         Route::get('/{employeeTimesheetData}', [EmployeeTimesheetDataDetail::class, 'show']);
