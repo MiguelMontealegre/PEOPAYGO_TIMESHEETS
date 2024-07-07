@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   defaultauth: 'devbackend',
-  api: 'http://localhost:8000/api',
+  api: 'http://54.160.199.184:80/api',
 };
 
 
